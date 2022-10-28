@@ -1,0 +1,47 @@
+﻿@model Tuple<List<Domain.Models.Role.UserRoles>, Domain.Models.UserAgg.User>
+
+<div style="margin-top: 110px" class="col-xs-12 col-md-12">
+    <div class="well with-header  with-footer">
+        <div class="header bg-darkorange">
+             لیست نقش های کاربر
+           
+        </div>
+        <a href="/Admin/AddUserRoles/@Model.Item2.Id" style="margin-bottom: 10px" class="btn btn-primary shiny">
+            <i class="fa fa-plus"></i>
+            افزودن
+        </a>
+        <table class="table table-hover table-striped table-bordered table-condensed">
+           
+            <thead>
+
+            <tr>
+                <th>
+                    نام نقش
+                </th>
+               
+                <th>
+                    دستورات
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Item1.Where(c=>c.UserId==Model.Item2.Id))
+            {
+                <tr>
+                    <td>
+                        @item.Role.RoleTitle
+                    </td>
+                  
+                    <td>
+                        <a href="/Admin/DeleteUserRole/@item.Id" class="btn btn-danger shiny">حذف نقش</a>
+                       
+                    </td>
+                </tr>
+            }
+
+            </tbody>
+        </table>
+
+
+    </div>
+</div>

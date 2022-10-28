@@ -1,0 +1,330 @@
+﻿@using Application.Convertor
+@model Domain.Models.Order.Order
+
+@*<div class="container">
+    <div class="row mb-5">
+    <form method="post" asp-controller="Order" asp-action="Index">
+    <partial name="_SildeBar" />
+
+    <div class="col-xl-9 col-lg-8 col-md-7">
+    <div class="ui-box bg-white">
+    <div class="ui-box-title">تاریخچه سفارشات</div>
+    <div class="ui-box-content">
+    <!-- start of order-tabs -->
+
+    <!-- end of order-tabs -->
+    <!-- start of tab-content -->
+    <div class="tab-content" id="myTabContent">
+    <!-- start of tab-pane -->
+
+    <!-- end of tab-pane -->
+    <!-- start of tab-pane -->
+    <div class="tab-pane fade active show" id="canceled" role="tabpanel" aria-labelledby="canceled-tab">
+    <div class="user-order-items">
+    <div class="user-order-item">
+    <div class="user-order-item-header">
+    <div class="mb-3">
+    <div class="row">
+    <div class="col-xl-3 col-lg-4 col-md-auto col-sm-6">
+    <span class="user-order-meta fa-num">@Model.CreatDate.ToShamsi()</span>
+    </div>
+    <div class="col-xl-3 col-lg-4 col-md-auto col-sm-6">
+    <span class="user-order-meta">@Model.Id</span>
+    </div>
+
+    </div>
+    </div>
+    <div>
+    <span class="text-muted fw-bold">مبلغ کل:</span>
+    <span class="fw-bold fa-num">
+    @ViewBag.TotalPrice
+    <span>تومان</span>
+    </span>
+    </div>
+    <a href="/profile/OrderDetail/@Model.Id" class="btn btn-link fw-bold user-order-detail-link">
+    جزئیات
+    سفارش <i class="ri-arrow-left-s-fill"></i>
+    </a>
+    </div>
+    <div class="user-order-item-content">
+    <div class="mb-3">
+    <span class="text-dark fa-num">مرسوله 1 از 1</span>
+    </div>
+    <div class="user-order-item-products">
+    @foreach (var item in Model.OrderDetails)
+    {
+    <a href="#">
+
+    <img src="/images/thumb/@item.Product.ProductGalleries.FirstOrDefault(c=>c.ProductId==item.ProductId).ImageName" alt="">
+    </a>
+    }
+    </div>
+
+    <div class="checkout-bill-row checkout-bill-action">
+    <button type="submit" class="btn btn-block btn-primary">ادامه فرایند خرید</button>
+    </div>
+    </div>
+    </div>
+
+    </div>
+    </div>
+    <!-- end of tab-pane -->
+    </div>
+    <!-- end of tab-content -->
+    </div>
+    </div>
+    </div>
+    </form>
+    </div>
+    </div>
+*@
+
+<main class="page-content">
+    <div class="container">
+        @if (ViewBag.addproduct != null && ViewBag.addproduct == true)
+        {
+            <div id="notificationSweetAlert"> <partial name="_SuccessAlertToastr" /></div>
+        }
+        <form method="post" asp-controller="Order" asp-action="Index">
+            <input type="hidden" name="orderId" value="@Model.Id" />
+            <div class="row">
+                <div class="col-xl-9 col-lg-8">
+                    <!-- start of nav-tabs -->
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link fs-6 fw-bold active" id="nav-1-tab" data-bs-toggle="tab" data-bs-target="#nav-1" type="button" role="tab" aria-controls="nav-1" aria-selected="true">
+                                سبد خرید
+                                <span class="counter fa-num">3</span>
+                            </button>
+
+                        </div>
+                    </nav>
+                    <!-- end of nav-tabs -->
+                    <!-- start of tab-content -->
+                    <div class="tab-content" id="nav-tabContent">
+                        <!-- start of tab-pane -->
+                        <!-- end of tab-pane -->
+                        <!-- start of tab-pane -->
+
+                        <div class="tab-pane py-4 fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab">
+                            <div class="ui-box bg-white p-2">
+                                <div class="ui-box-content">
+                                    <!-- start of cart-items -->
+                                    @foreach (var item in Model.OrderDetails)
+                                    {
+                                        <div class="cart-items">
+                                            <!-- start of cart-item -->
+                                            <div class="cart-item">
+                                                <div class="cart-item--thumbnail">
+                                                    <a href="#">
+                                                        <img src="/images/thumb/@item.Product.ProductGalleries.FirstOrDefault(c => c.ProductId == item.ProductId).ImageName" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="cart-item--detail">
+                                                    <h2 class="cart-item--title mb-2">
+                                                        <a href="#">
+                                                            @item.Product.Title
+                                                        </a>
+                                                    </h2>
+                                                    <div class="cart-item--variant mb-2">
+                                                        <span class="color" style="background-color: #fad7c2;"></span>
+                                                        <span class="ms-1">طلایی</span>
+                                                    </div>
+                                                    <div class="cart-item--data mb-4">
+                                                        <ul>
+                                                            <li>
+                                                                <i class="ri-shield-check-fill text-secondary"></i>
+                                                                <span>
+                                                                    گارانتی
+                                                                    اصالت و
+                                                                    سلامت فیزیکی
+                                                                    کالا
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <i class="ri-store-3-fill text-secondary"></i>
+                                                                <span>
+                                                                    اسم
+                                                                    فروشگاه
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <i class="ri-checkbox-multiple-fill text-primary"></i>
+                                                                <span>
+                                                                    موجود
+                                                                    در
+                                                                    انبار
+                                                                </span>
+                                                                <span class="text-secondary mx-2">|</span>
+                                                                <i class="ri-truck-fill text-danger"></i>
+                                                                <span>
+                                                                    ارسال
+                                                                    (نحوه
+                                                                    ارسال)
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="cart-item--price--actions">
+                                                        <div class="cart-item--actions">
+                                                            <div class="num-block fa-num me-3">
+                                                                <div class="num-in">
+                                                                    <a href="/profile/IncraeseCount/@item.Id" class="minus dis">+</a>
+                                                                    <input type="text" class="in-num" value="@item.Count" readonly="">
+                                                                    <a href="/profile/DecreaseCount/@item.Id" class="plus">-</a>
+                                                                </div>
+                                                            </div>
+                                                            <a href="/profile/DeleteOrderDetail/@item.Id" class="btn btn-link btn-sm text-secondary"><i class="ri-delete-bin-5-line me-1"></i>حذف</a>
+
+                                                        </div>
+                                                        <div class="cart-item--price fa-num">
+                                                            @* <div class="cart-item--discount">
+                                                        <span>تخفیف</span>
+                                                        <del>10,000</del>
+                                                        <span class="currency">تومان</span>
+                                                        </div>*@
+                                                            <div class="cart-item--price-now">
+                                                                <span>@item.Price</span>
+                                                                <span class="currency">تومان</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end of cart-item -->
+                                            <!-- start of cart-item -->
+                                            <!-- end of cart-item -->
+                                            <!-- start of cart-item -->
+                                            <!-- end of cart-item -->
+                                        </div>
+                                        <!-- end of cart-items -->
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- end of tab-pane -->
+                    </div>
+                    <!-- end of tab-content -->
+                </div>
+                <div class="col-xl-3 col-lg-4">
+                    <div class="ui-sticky ui-sticky-top">
+                        <!-- start of checkout-bill -->
+
+                        <div class="checkout-bill ui-box bg-white mb-5">
+
+                            <div class="checkout-bill-row checkout-bill-note">
+                               
+
+                                <label class="label">کد تخفیف</label>
+                                <input  id="discountCode" type="text" class="form-control" placeholder="کد تخفیف">
+                                <button type="button" id="DiscountBTN" onclick="Discount()" class="btn btn-primary px-2">ثبت </button>
+
+                            
+                            </div>
+                            @if (ViewBag.DiscountPrice != null)
+                            {
+                                <div class="checkout-bill-row">
+                                    <div class="checkout-bill-row-label">قیمت کالا ها با تخفیف</div>
+                                    <div class="checkout-bill-row-value">
+                                        <span class="fs-6 text-danger">@ViewBag.DiscountPrice</span>
+                                        <span class="currency text-danger">تومان</span>
+                                    </div>
+                                </div>
+                            }
+                            <input type="hidden" id="buyPrice" value="@(ViewBag.DiscountPrice!=null?"@ViewBag.DiscountPrice":"@ViewBag.TotalPrice")" />
+                            <div class="checkout-bill-row">
+                                <div class="checkout-bill-row-label"> جمع سبد خرید</div>
+                                <div class="checkout-bill-row-value">
+                                    <span class="fs-6"> @ViewBag.TotalPrice </span> <span class="currency">تومان</span>
+                                </div>
+                            </div>
+                            <div class="checkout-bill-row checkout-bill-note">
+                                هزینه‌ی ارسال در ادامه بر اساس آدرس، زمان و نحوه‌ی ارسال انتخابی شما‌ محاسبه و به
+                                این مبلغ اضافه خواهد شد
+                            </div>
+                            <div class="checkout-bill-row checkout-bill-action">
+                                <button type="submit" onclick="Buy()" class="btn btn-block btn-primary">ادامه فرایند خرید</button>
+                            </div>
+                            <div class="checkout-bill-row checkout-bill-footer">
+                                <div class="checkout-bill-row-label">
+                                    <span class="d-flex">
+                                        <i class="ri-copper-coin-fill text-warning me-1"></i>
+                                        <span class="fs-7">امتیاز باشگاه مشتریان</span>
+                                    </span>
+                                </div>
+                                <div class="checkout-bill-row-value">۱۵۰ <span class="fs-7 fw-bold text-muted">امتیاز</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- end of checkout-bill -->
+        <!-- start of widget -->
+        <div class="widget p-0">
+            <div class="widget-content widget--free-shipping">
+                <div class="free-shipping--detail">
+                    <div class="title">ارسال رایگان سفارش</div>
+                    <div class="subtitle">سفارش‌های بالای ۳۰۰ هزار تومان</div>
+                </div>
+                <div class="free-shipping--banner">
+                    <img src="/site/theme-assets/images/theme/free-shipping--banner.png" alt="ارسال رایگان سفارش">
+                </div>
+            </div>
+        </div>
+        <!-- end of widget -->
+    </div>
+
+
+
+</main>
+@section Section{
+    <script>
+
+       
+
+        function Discount() {
+            $.ajax({
+                url: "/Profile/UseDiscount/@Model.Id",
+                type: "get",
+                data: {
+                    code: $("#discountCode").val()
+                },
+                beforeSend: function () {
+                    //open_waiting();
+                },
+                success: function (res) {
+                    //close_waiting();
+                    //$("#DateTimeModal").modal("show");
+                },
+                error: function () {
+                    //close_waiting();
+                    //ShowMessage("اعلان", "عملیات با خطا مواجه شد لطفا مجدد تلاش کنید .", "error");
+                }
+            });
+        }
+           function Buy() {
+            $.ajax({
+                url: "/Profile/Orders/@Model.Id",
+                type: "post",
+                data: {
+                    price: $("#buyPrice").val()
+                },
+                beforeSend: function () {
+                    //open_waiting();
+                },
+                success: function (res) {
+                    //close_waiting();
+                    //$("#DateTimeModal").modal("show");
+                },
+                error: function () {
+                    //close_waiting();
+                    //ShowMessage("اعلان", "عملیات با خطا مواجه شد لطفا مجدد تلاش کنید .", "error");
+                }
+            });
+        }
+
+        $('#notificationSweetAlert').fadeOut(5000)
+    </script>
+}

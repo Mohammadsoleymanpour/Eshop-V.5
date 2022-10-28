@@ -1,0 +1,48 @@
+﻿@model Domain.ViewModels.DynamicPage.DynamicPageViewModelAdmin
+
+
+<div style="margin-top: 110px" class="col-lg-12 col-sm-6 col-xs-12">
+    <form method="post" asp-controller="DynamicPage" asp-action="AddPages">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-pink">
+                <span class="widget-caption">افزودن لینک</span>
+            </div>
+            <div class="widget-body">
+                <div id="horizontal-form">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" asp-for="Title"  placeholder="عنوان" class="form-control">
+                            <div class="horizontal-space"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" asp-for="UrlLink" placeholder="لینک" class="form-control">
+                            <div class="horizontal-space"></div>
+                        </div>
+                    </div>
+                    
+                    <textarea id="content" asp-for="Content"></textarea>
+                    <div class="horizontal-space"></div>
+                    
+                    <button type="submit"  class="btn btn-palegreen btn-lg shiny">ثبت</button>
+                </div>
+               
+            </div>
+           
+        </div>
+    </form>
+</div>
+
+@section Section
+{
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+
+        CKEDITOR.replace("Content", {
+            customConfig: '/js/Config.js'
+        });
+
+    </script>
+    
+    
+}

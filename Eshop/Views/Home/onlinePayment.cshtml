@@ -1,0 +1,111 @@
+﻿@using Application.Security
+
+@{
+    ViewData["Title"] = "نتیجه پرداخت";
+}
+
+
+
+<div class="container">
+    @if (ViewBag.IsSuccess!=null && ViewBag.IsSuccess == true)
+    {
+        <main class="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <!-- start of box -->
+                        <div class="ui-box bg-white mb-5">
+                            <div class="ui-box-content">
+                                <div class="row">
+                                    <div class="col-md-8 order-md-1 order-2">
+                                        <div class="fs-5 fw-bold text-success mb-3">
+                                            با موفقیت پرداخت و ثبت گردید.
+                                        </div>
+                                        <div class="d-flex align-items-center flex-wrap mb-3">
+                                            <div class="text-secondary me-3">شماره سفارش:</div>
+                                            <div class="font-en">@ViewBag.code</div>
+                                        </div>
+                                        <div class="text-success mb-3">
+                                            پرداخت با موفقیت انجام شد. سفارش شما با موفقیت
+                                            ثبت
+                                            شد و در زمان تعیین‌شده برای شما ارسال خواهد شد. از اینکه ما را برای
+                                            خرید انتخاب کردید از شما سپاسگزاریم.
+                                        </div>
+                                        <div class="d-flex align-items-center flex-wrap">
+                                            <a href="/profile/orders/@User.GetUserId()" class="btn btn-primary me-4">پیگیری سفارش</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 order-md-2 order-1 mb-md-0 mb-4 text-center">
+                                        <img src="/site/theme-assets/images/theme/checkout-successful.png" class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of box -->
+                    
+                    </div>
+                </div>
+            </div>
+        </main>
+    }
+    else
+    {
+        <main class="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <!-- start of box -->
+                        <div class="ui-box bg-white mb-5">
+                            <div class="ui-box-content">
+                                <div class="row">
+                                    <div class="col-md-8 order-md-1 order-2">
+                                        <div class="fs-5 fw-bold text-danger mb-3">
+                                            متاسفانه پرداخت شما ناموفق بود!
+                                        </div>
+                                      
+                                        <div class="text-danger mb-3">
+                                            برای جلوگیری از حذف خودکار سفارش، لطفا مبلغ سفارش پرداخت نمایید.
+                                        </div>
+                                        <div class="d-flex align-items-center flex-wrap">
+                                            <a href="/onlinePayment/@ViewBag.OrderId" class="btn btn-primary me-4">پرداخت مجدد</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 order-md-2 order-1 mb-md-0 mb-4 text-center">
+                                        <img src="/site/theme-assets/images/theme/checkout-unsuccessful.png" class="img-fluid" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of box -->
+                   
+                    </div>
+                </div>
+            </div>
+        </main>
+    }
+    <!-- start of box -->
+    <div class="ui-box bg-white mb-5">
+        <div class="ui-box-content fa-num">
+            <div class="row fs-7 fw-bold">
+         
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                    <div class="text-muted mb-2">درگاه پرداخت</div>
+                    <div class="text-dark">درگاه زرین پال</div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                    <div class="text-muted mb-2">شماره پیگیری</div>
+                    <div class="text-dark">@ViewBag.OrderId</div>
+                </div>
+                @*<div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                    <div class="text-muted mb-2">زمان</div>
+                    <div class="text-dark">۱۲:۲۴:۱۳</div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                    <div class="text-muted mb-2">تاریخ</div>
+                    <div class="text-dark">۲۵ دی ۱۴۰۰</div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    <!-- end of box -->
+</div>

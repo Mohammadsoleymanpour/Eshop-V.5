@@ -1,0 +1,404 @@
+﻿@model Domain.ViewModels.Product.FilterProduct
+
+@{
+    ViewData["Title"] = "محصولات";
+}
+@section css
+{
+
+<link rel="stylesheet" href="/Admin/assets/css/priceRange.css">
+}
+<main class="page-content">
+<form id="indexForm">
+<div class="container">
+
+<div class="row">
+<div class="col-xl-3 col-lg-4 col-md-5 responsive-sidebar">
+<div class="ui-sticky ui-sticky-top">
+<div class="ui-box sidebar-widgets">
+<!-- start of widget -->
+<div class="widget p-0 mb-3">
+    <div class="widget-content widget--free-shipping">
+        <div class="free-shipping--detail">
+            <div class="title">ارسال رایگان سفارش</div>
+            <div class="subtitle">سفارش‌های بالای ۳۰۰ هزار تومان</div>
+        </div>
+        <div class="free-shipping--banner">
+            <img src="/site/theme-assets/images/theme/free-shipping--banner.png" alt="ارسال رایگان سفارش">
+        </div>
+    </div>
+</div>
+<!-- end of widget -->
+<!-- start of widget -->
+@*<div class="widget mb-3">
+    <div class="widget-title">دسته‌بندی نتایج</div>
+    <div class="widget-content widget--category-results">
+        <ul>
+            <li class="category--arrow-left">
+                <a href="#">کالای دیجیتال</a>
+                <ul>
+                    <li class="category--arrow-down">
+                        <a href="#">موبایل</a>
+                        <ul>
+                            <li class="current">گوشی موبایل</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>*@
+<!-- end of widget -->
+<!-- start of widget -->
+<div class="widget mb-3">
+    <div class="widget-title">جستجو در نتایج:</div>
+    <div class="widget-content widget--search">
+        <form method="get" asp-controller="Product" asp-action="Products" >
+            <div class="form-element-row">
+                <input type="text" asp-for="Title"  class="form-control" placeholder="نام محصول یا…">
+                <i class="ri-search-line icon"></i>
+
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg shiny">اعمال</button>
+        </form>
+    </div>
+</div>
+<!-- end of widget -->
+<!-- start of widget -->
+
+<!-- end of widget -->
+<!-- start of widget -->
+<div class="widget py-1 mb-3">
+    <div class="widget-content widget--filter-switcher">
+        <div class="d-flex border-bottom pb-1 mb-2">
+            <i class="ri-user-2-fill text-primary me-2"></i>
+            <span class="fs-7">
+                با خرید از کالاهایی با امکان ارسال توسط فروشنده سفارش خود
+                را
+                زودتر تحویل بگیرید
+            </span>
+        </div>
+        <div class="form-check form-switch mb-0">
+            <input class="form-check-input" type="checkbox" id="has_ship_by_seller">
+            <label class="form-check-label" for="has_ship_by_seller">
+                امکان ارسال توسط
+                فروشنده
+            </label>
+        </div>
+    </div>
+</div>
+<!-- end of widget -->
+<!-- start of widget -->
+<div class="widget py-1 mb-3">
+    <div class="widget-content widget--filter-switcher">
+        <div class="form-check form-switch mb-0">
+            <input class="form-check-input" type="checkbox" id="has_jet_delivery">
+            <label class="form-check-label" for="has_jet_delivery">
+                فقط ارسال
+                فوری
+            </label>
+        </div>
+    </div>
+</div>
+<!-- end of widget -->
+<!-- start of widget -->
+<div class="widget py-1 mb-3">
+    <div class="widget-content widget--filter-switcher">
+        <div class="form-check form-switch mb-0">
+            <input class="form-check-input" type="checkbox" id="has_selling_stock">
+            <label class="form-check-label" for="has_selling_stock">
+                فقط کالاهای
+                موجود
+            </label>
+        </div>
+    </div>
+</div>
+<!-- end of widget -->
+<!-- start of widget -->
+
+<!-- end of widget -->
+<form id="" method="get" asp-controller="Product" asp-action="Products">
+    <!-- start of widget -->
+    <div class="widget widget-collapse">
+        <div class="widget-title widget-title--collapse-btn" data-bs-toggle="collapse" data-bs-target="#collapsePriceFilter" aria-expanded="false" aria-controls="collapsePriceFilter" role="button">محدوده قیمت</div>
+        <div class="widget-content widget--search fa-num collapse" id="collapsePriceFilter">
+
+            <div  id="searchable_filter" class="dataTables_filter small">
+                <div style="margin-bottom: 10px" class="range-slider ">
+
+                    <input asp-for="StartPrice" value="" class="rangepriccce" min="0" max="10000000" step="500" type="range"/>
+                    <input asp-for="EndPrice" value="" class="rangepriccce" min="0" max="10000000" step="500" type="range"/>
+
+                    <svg width="100%" height="24">
+                        <line x1="4" y1="0" x2="300" y2="0" stroke="#444" stroke-width="12" stroke-dasharray="1 28"></line>
+                    </svg>
+                    <span>
+                        از
+                        <input type="number" value="" min="0" max="10000000"/>تا
+                        <input type="number" value="" min="0" max="10000000"/>
+                    </span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg shiny">اعمال</button>
+        </div>
+    </div>
+    <!-- end of widget -->
+</form>
+</div>
+</div>
+</div>
+<div class="col-xl-9 col-lg-8 col-md-7">
+    <!-- start of breadcrumb -->
+  @*  <nav class="mb-2" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">خانه</a></li>
+            <li class="breadcrumb-item"><a href="#">کالای دیجیتال</a></li>
+            <li class="breadcrumb-item"><a href="#">موبایل</a></li>
+            <li class="breadcrumb-item"><a href="#">گوشی موبایل</a></li>
+        </ol>
+    </nav>*@
+    <!-- end of breadcrumb -->
+    <button class="btn btn-primary mb-3 d-md-none toggle-responsive-sidebar">
+        فیلتر پیشرفته
+        <i class="ri-equalizer-fill ms-1"></i>
+    </button>
+    <div class="listing-products">
+
+        <div class="listing-products-header mb-4">
+            <div class="listing-products-filter-container do-simplebar me-sm-4" data-simplebar="init">
+
+                <div class="simplebar-wrapper" style="margin: 0px;">
+                    <div class="simplebar-height-auto-observer-wrapper">
+                        <div class="simplebar-height-auto-observer"></div>
+                    </div>
+                    <div class="simplebar-mask">
+                        <div class="simplebar-offset" style="left: 0px; bottom: 0px;">
+                            <div class="simplebar-content-wrapper" style="height: auto; overflow: hidden;">
+                                <div class="simplebar-content" style="padding: 0px;">
+                                    <div class="listing-products-filter">
+                                        <form method="get" asp-controller="Product" asp-action="Products">
+                                            <input type="hidden" asp-for="OrderBy" id="filterbyorder"/>
+                                            <!-- start of nav-tabs -->
+                                            <ul class="nav nav-pills nav-tabs align-items-center" id="sort-tab" role="tablist">
+                                                <li class="d-inline-flex align-items-center nav-item me-3 text-muted">
+                                                    <i class="ri-equalizer-line me-2"></i>
+                                                    مرتب سازی بر اساس:
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button onclick="orderBy('all')" class="nav-link @((Model.OrderBy == "all" || Model.OrderBy == null) ? "active" : "")" id="most-visited-tab" data-bs-toggle="tab" data-bs-target="#most-visited" type="button" role="tab" aria-controls="most-visited" aria-selected="true">همه</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button onclick="orderBy('newest')" class="nav-link @((Model.OrderBy == "newest") ? "active" : "")" id="best-selling-tab" data-bs-toggle="tab" data-bs-target="#best-selling" type="button" role="tab" aria-controls="best-selling" aria-selected="false">
+                                                        جدید ترین
+                                                    </button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button onclick="orderBy('expensive')" class="nav-link @((Model.OrderBy == "expensive") ? "active" : "")" id="most-popular-tab" data-bs-toggle="tab" data-bs-target="#most-popular" type="button" role="tab" aria-controls="most-popular" aria-selected="false">
+                                                        گران
+                                                        ترین
+                                                    </button>
+                                                </li>
+
+
+                                                <li class="nav-item" role="presentation">
+                                                    <button onclick="orderBy('cheep')" class="nav-link @((Model.OrderBy == "cheep") ? "active" : "")" id="cheapest-tab" data-bs-toggle="tab" data-bs-target="#cheapest" type="button" role="tab" aria-controls="cheapest" aria-selected="false">ارزان ترین</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button onclick="orderBy('popular')" class="nav-link @((Model.OrderBy == "popular") ? "active" : "")" id="most-expensive-tab" data-bs-toggle="tab" data-bs-target="#most-expensive" type="button" role="tab" aria-controls="most-expensive" aria-selected="false">
+                                                        محبوب ترین
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            <!-- end of nav-tabs -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simplebar-placeholder" style="width: auto; height: 55px;"></div>
+                </div>
+                <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                    <div class="simplebar-scrollbar simplebar-visible" style="width: 0px; display: none;"></div>
+                </div>
+                <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
+                    <div class="simplebar-scrollbar simplebar-visible" style="height: 0px; display: none;"></div>
+                </div>
+            </div>
+            <!-- start of listing-products-view -->
+            <div class="listing-products-view d-sm-flex d-none">
+                <button class="btn btn-outline-light btn-grid-view me-2"><i class="ri-grid-line"></i></button>
+                <button class="btn btn-outline-light btn-list-view"><i class="ri-list-check-2"></i></button>
+            </div>
+            <!-- end of listing-products-view -->
+        </div>
+        <div class="listing-products-content">
+            <!-- start of tab-content -->
+            <div class="tab-content" id="sort-tabContent">
+                <!-- start of tab-pane -->
+                @foreach (var item in Model.Entities)
+                {
+                    <div class="product-card-container mb-4 col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                        <!-- start of product-card -->
+                        <div class="product-card">
+                            <div class="product-thumbnail">
+                                <a href="#">
+                                    <img src="/images/thumb/@item.ProductGalleries.FirstOrDefault(c => c.IsDefault).ImageName" alt="product title">
+                                </a>
+                            </div>
+                            <div class="product-card-body">
+                                <h2 class="product-title">
+                                    <a href="#">@item.Title</a>
+                                </h2>
+                                <div class="product-variant">
+                                    <span class="color" style="background-color: #24476e;"></span>
+                                    <span class="color" style="background-color: #12505b;"></span>
+                                    <span class="color" style="background-color: #e4a793;"></span>
+                                    <span>+</span>
+                                </div>
+                                <div class="product-price fa-num">
+                                    <span class="price-now">@item.Price.ToString("#00") <span class="currency">تومان</span></span>
+                                </div>
+                            </div>
+                            <div class="product-card-footer">
+                                <div class="d-flex align-items-center justify-content-between border-top mt-2 py-2">
+                                    <div class="product-actions">
+                                        <ul>
+                                            <li>
+                                                <a href="/BuyProduct/@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="افزودن به سبد خرید" aria-label="افزودن به سبد خرید"><i class="ri-shopping-cart-line"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="/Product/@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="مشاهده سریع" aria-label="مشاهده سریع" data-remodal-target="quick-view-modal"><i class="ri-search-line"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="/AddFavouriteProduct/@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="افزودن به علاقمندی" aria-label="افزودن به علاقمندی"><i class="ri-heart-3-line"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-rating fa-num">
+                                        <i class="ri-star-fill star"></i>
+                                        <strong>۴.۴</strong>
+                                        <span>(۴۳۶)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of product-card -->
+                    </div>
+                }
+                <!-- end of tab-pane -->
+                <!-- start of tab-pane -->
+
+            </div>
+            <!-- end of tab-pane -->
+            <!-- start of tab-pane -->
+            <input type="hidden" asp-for="Page" id="page"/>
+        </div>
+        <!-- end of tab-pane -->
+        <!-- start of tab-pane -->
+
+    </div>
+</div>
+<!-- end of tab-pane -->
+<!-- start of tab-pane -->
+
+</div>
+<!-- end of tab-pane -->
+<!-- start of tab-pane -->
+
+</div>
+<!-- end of tab-pane -->
+<!-- end of tab-content -->
+<partial name="_PageingView" model="@Model.GetCurrentPaging()"/>
+
+<div class="responsive-sidebar-overlay"></div>
+
+<!-- start of quick-view-modal -->
+<!-- end of quick-view-modal -->
+</form>
+</main>
+
+@section Section
+{
+    
+    <script>
+    function OnClick(pageId) {
+    $("#page").val(pageId)
+    $("#indexForm").submit();
+
+    }
+</script>
+    <script>
+    function orderBy(order) {
+                                if (order === "popular") {
+                                    document.getElementById('filterbyorder').value = "popular";
+                                    document.forms[6].submit();
+                                }
+                                else if (order === "cheep") {
+                                    document.getElementById('filterbyorder').value = "cheep";
+                                    document.forms[6].submit();
+                                }
+                                else if (order === "expensive") {
+                                    document.getElementById('filterbyorder').value = "expensive";
+                                    document.forms[6].submit();
+
+                                }
+                                else if (order === "newest") {
+                                    document.getElementById('filterbyorder').value = "newest";
+                                    document.forms[6].submit();
+
+                                }
+                                else {
+                                    document.getElementById('filterbyorder').value = "all";
+                                    document.forms[6].submit();
+                                }
+                            }
+</script>
+<script>
+
+    (function() {
+
+    var parent = document.querySelector(".range-slider");
+    if(!parent) return;
+
+    var
+      rangeS = parent.querySelectorAll("input[type=range]"),
+      numberS = parent.querySelectorAll("input[type=number]");
+
+    rangeS.forEach(function(el) {
+      el.oninput = function() {
+        var slide1 = parseFloat(rangeS[0].value),
+              slide2 = parseFloat(rangeS[1].value);
+
+        if (slide1 > slide2) {
+                  [slide1, slide2] = [slide2, slide1];
+           var tmp = slide2;
+           slide2 = slide1;
+           slide1 = tmp;
+        }
+
+        numberS[0].value = slide1;
+        numberS[1].value = slide2;
+      }
+        });
+
+    numberS.forEach(function(el) {
+      el.oninput = function() {
+              var number1 = parseFloat(numberS[0].value),
+                      number2 = parseFloat(numberS[1].value);
+
+        if (number1 > number2) {
+          var tmp = number1;
+          numberS[0].value = number2;
+          numberS[1].value = tmp;
+        }
+
+        rangeS[0].value = number1;
+        rangeS[1].value = number2;
+
+      }
+        });
+
+    })();
+</script>
+}

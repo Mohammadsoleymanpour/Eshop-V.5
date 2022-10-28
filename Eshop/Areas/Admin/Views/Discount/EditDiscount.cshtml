@@ -1,0 +1,67 @@
+﻿@using Domain.ViewModels.Order
+@model EditDiscountViewModel
+
+@{
+    ViewData["Title"] = "افزودن کد تخفیف";
+}
+
+<div style="margin-top: 110px" class="col-lg-12 col-sm-6 col-xs-12">
+    <form method="post" asp-controller="Discount" asp-action="EditDiscount">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-pink">
+                <span class="widget-caption">ویرایش کد تخفیف</span>
+            </div>
+            <div class="widget-body">
+                <div id="horizontal-form">
+                    <input type="hidden" asp-for="Id"/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" asp-for="DiscountCode" placeholder="کد تخفیف" class="form-control">
+                            <div class="horizontal-space"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" asp-for="DicountPercent" placeholder="درصد تخفیف" class="form-control">
+                            <div class="horizontal-space"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="number" asp-for="Useable" placeholder="تعداد قابل استفاده" class="form-control">
+                            <div class="horizontal-space"></div>
+                        </div>
+                      
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" asp-for="StartDate" id="test-date-id" class="form-control " style="border-radius: 5px" placeholder="تاریخ شروع">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" asp-for="EndDate" id="test-date-id2" class="form-control " style="border-radius: 5px" placeholder="تاریخ پایان">
+                        </div>
+                    </div>
+                    <div class="horizontal-space"></div>
+
+                    <button type="submit" class="btn btn-palegreen btn-lg shiny">ثبت</button>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+</div>
+
+@section Section
+    {
+    <script src="//code.jquery.com/jquery.min.js"></script>
+
+    <script src="/js/kamadatepicker.js"></script>
+    <script src="/js/kamadatepicker.holidays.js"></script>
+    <script src="/js/kamadatepicker.min.js"></script>
+
+    <script>
+         kamaDatepicker('test-date-id2', { buttonsColor: "red", forceFarsiDigits: true });
+
+        kamaDatepicker('test-date-id', { buttonsColor: "red", forceFarsiDigits: true });
+    </script>
+
+}

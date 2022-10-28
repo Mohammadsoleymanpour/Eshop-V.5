@@ -1,0 +1,116 @@
+﻿@model Domain.ViewModels.Product.EditProductViewModel
+@using Domain.Models.Product
+@{
+    var features = ViewData["Features"] as List<Feature>;
+    var featuresValues = ViewData["FeaturesValues"] as List<FeatureValue>;
+    int? id = ViewData["productId"] as int?;
+    var res = ViewData["ProductFeature"] as List<ProductSelectedFeature>;
+}
+@**@
+<table class="table table-hover">
+    <thead class="bordered-darkorange">
+    <tr>
+        <th>
+            نام ویژگی
+        </th>
+        <th>
+            مقدار
+
+            <a style="float:  left" class="btn btn-default purple" data-toggle="modal" data-target="#modalFeature">
+
+                <i class="fa fa-plus"></i>
+                افزودن مدل جدید
+            </a>
+
+        </th>
+
+
+    </tr>
+    </thead>
+    @foreach (var item in Model.Prices)
+    {
+
+        @foreach (var feature in res.Where(c=>c.ProductPriceId==item.Id))
+        {
+
+            <tbody>
+
+            <tr>
+                <td>
+                    @feature.Feature.Title
+                </td>
+                <td>
+                    @feature.featureValue.Value
+                </td>
+            </tr>
+
+            </tbody>
+
+
+        }
+        <tr style="margin-right: 50px" class="warning ">
+
+            <td colspan="3">
+
+                قیمت اضافه: @item.Price
+                
+               
+                
+                <span class="border border-bottom border-primary"> </span>
+                
+            <button  onclick="Deletefeaturs(@item.Id)" type="button" id="btndelete"  style="float: left" class="btn btn-sm btn-danger shiny">حذف ویژگی</button>
+            </td>
+
+        </tr>
+
+
+
+    }
+</table>
+
+
+<div class="modal fade" id="modalFeature" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">اضافه کردن ویزگی جدید</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+
+                @foreach (var item in features)
+                {
+
+                    <div class="md-form mb-4">
+                        <i class="glyphicon glyphicon-pencil"></i>
+
+                        <input type="hidden" value="@item.Id" name="feature">
+                        <label data-error="wrong" data-success="right" for="defaultForm-pass">@item.Title</label>
+                        <select class="featureValue">
+                            <option value="0">انتخاب کنید</option>
+                            @foreach (var value in featuresValues.Where(v => v.FeatureId == item.Id))
+                            {
+                                <option value="@value.Id"> @value.Value</option>
+                            }
+                        </select>
+                    </div>
+
+                }
+                <label>قیمت اضافه : <input type="number" id="plusPrice"></label>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button onclick="getfeaturs()" type="button" id="btnAddFeature" class="btn btn-default">ثبت</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Section
+{
+  
+
+}
+  

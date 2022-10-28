@@ -1,0 +1,149 @@
+﻿@using Domain.Models.Enums
+@using Domain.ViewModels.ContactUs
+@using Eshop.Common
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Domain.ViewModels.ContactUs.FilterContactUssViewModel
+
+@{
+    ViewData["Title"] = "لیست تماس با ما";
+}
+
+<div style="margin-top: 100px" class="col-xs-6 col-md-12 position-relative">
+
+    <div class="row">
+        <form id="indexForm">
+            <input asp-for="Page" type="hidden" id="PageId"/>
+            <div id="dataTables-example_filter" class="dataTables_filter">
+                <div class=" col-sm-5">
+                    <div class="form-group" style="margin-top: 10px">
+                        <span class="input-icon inverted">
+                            <input type="search" asp-for="Email"  class="form-control input-sm" placeholder="جست و جو بر اساس ایمیل">
+                            <i class="glyphicon glyphicon-search bg-blue"></i>
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class=" col-sm-5">
+                    <div class="form-group" style="margin-top: 10px">
+                        <span class="input-icon inverted">
+                            <input type="text" asp-for="PhoneNumber"  class="form-control input-sm" placeholder="جست و جو بر اساس شماره موبایل">
+                            <i class="glyphicon glyphicon-search bg-blue"></i>
+                        </span>
+
+                    </div>
+
+                </div> <div class=" col-sm-5">
+                    <div class="form-group" style="margin-top: 10px">
+                        <span class="input-icon inverted">
+                            <select asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(FilterContactUssStatus))"></select>
+                            <i class="glyphicon glyphicon-search bg-blue"></i>
+                        </span>
+
+                    </div>   <div class="form-group" style="margin-top: 10px">
+                        <span class="input-icon inverted">
+                            <select asp-for="Subject" asp-items="Html.GetEnumSelectList(typeof(FilterContactUssSubject))"></select>
+                            <i class="glyphicon glyphicon-search bg-blue"></i>
+                        </span>
+
+                    </div>
+
+                </div>
+                <div style="margin: 10px;">
+                    <button type="submit" class="btn btn-blue">جست و جو</button>
+                    <a href="/Admin/GetContactUsss" class="btn btn-blue">حذف فیلتر</a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+  
+    <div class="well with-header  with-footer">
+        <div class="header bg-blue">
+            لیست تیکت های سایت
+        </div>
+        <table class="table table-hover">
+            <thead class="bordered-darkorange">
+                <tr>
+                    <th>
+                        ایمیل
+                    </th>
+                    <th>
+                        شماره موبایل
+                    </th>
+                    <th>
+                        موضوع
+                    </th>
+                    <th>
+                        وضعیت
+                    </th>
+
+                    <th>
+                        دستورات
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Entities)
+                {
+
+                    <tr>
+                        <td>
+                            <h3>
+                            @item.Email
+                            </h3>
+                        </td>
+                        <td>
+                            <h3>
+                                @item.PhoneNumber
+                            </h3>
+                        </td>
+                        <td>
+                            @(item.Subject)
+                        </td>
+                        <td class="fa-num">
+                            @if (item.Status == ContactUssEnums.Status.Answered)
+                            {
+                                <span class="badge bg-success rounded-pill">پاسخ داده
+                                    شد</span>
+                            }
+                            else if(item.Status == ContactUssEnums.Status.NotAnswered)
+                           {
+                               <span class="badge bg-danger rounded-pill">پاسخ داده نشده</span>
+                           }
+                        </td>
+                      
+                        <td>
+
+                            <Authrize permission-id="@Permissions.AnswerContactUs">
+                                <a class="btn btn-warning" href="/AnswerContactUs/@item.Id">پاسخ دادن</a>
+                            </Authrize>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+                <partial name="_Paging" model="@Model.GetCurrentPaging()"/>
+
+        <div class="footer">
+            <code>class="table table-hover"</code>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+@section Section
+{
+    <script>
+        function OnClick(pageId) {
+        $("#PageId").val(pageId)
+        $("#indexForm").submit();
+
+        }
+    </script>
+}

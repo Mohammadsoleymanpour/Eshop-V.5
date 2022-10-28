@@ -1,0 +1,60 @@
+﻿@using Domain.ViewModels.DynamicLinks
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Domain.Models.Enums
+@model Domain.ViewModels.DynamicLinks.AddLinkViewModel
+@{
+    ViewData["Title"] = "AddLink";
+}
+
+<div style="margin-top: 110px" class="col-lg-12 col-sm-6 col-xs-12">
+    <form method="post" asp-controller="DynamicLink" asp-action="AddLink">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-pink">
+                <span class="widget-caption">افزودن لینک</span>
+            </div>
+            <div class="widget-body">
+                <div id="horizontal-form">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" asp-for="Title"  placeholder="عنوان" class="form-control">
+                            <div class="horizontal-space"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" asp-for="LinkUrl" placeholder="لینک" class="form-control">
+                            <div class="horizontal-space"></div>
+                        </div>
+                    </div>
+                    
+                        <input type="text" asp-for="ExpirationDate" id="test-date-id" class="form-control " style="border-radius: 5px" placeholder="تاریخ انقضا">
+                   
+                    <select style="margin-top: 20px" asp-for="Position" asp-items="Html.GetEnumSelectList(typeof(PositionLinks))"></select>
+                    <div class="horizontal-space"></div>
+                    
+                        <button type="submit"  class="btn btn-palegreen btn-lg shiny">ثبت</button>
+                </div>
+               
+            </div>
+           
+        </div>
+    </form>
+</div>
+
+@section Section
+{
+<script src="//code.jquery.com/jquery.min.js"></script>
+
+<script src="/js/kamadatepicker.js"></script>
+<script src="/js/kamadatepicker.holidays.js"></script>
+<script src="/js/kamadatepicker.min.js"></script>
+
+    @*  <script src="/js/webpack.config.js"></script>*@
+
+
+<script>
+
+    kamaDatepicker('test-date-id', { buttonsColor: "red", forceFarsiDigits: true });
+</script>
+
+
+}

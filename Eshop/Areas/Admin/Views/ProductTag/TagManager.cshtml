@@ -1,0 +1,45 @@
+﻿@using Domain.ViewModels.Product_Tags
+@model TagViewModel
+@{
+    ViewData["Title"] = " زیر گروه";
+    bool? delete = ViewBag.IsDeleteing as bool?;
+    bool? edit = ViewBag.IsEditing as bool?;
+    int? id =ViewData["ProductId"] as int?;
+}
+
+<form method="post" asp-controller="ProductTag" asp-action="AddTag" asp-route-id="@id">
+    <div style="margin-top: 100px" class="container">
+        <div class="row">
+            <div class="form-group">
+                <label for="definpu">نام تگ</label>
+               
+
+                @if (delete == true)
+                {
+
+                    <input type="text" class="form-control" id="definput" value="@Model.TagName" asp-for="TagName" placeholder="لطفا نام تگ را وارد کنید" readonly="readonly">
+                }
+                @if (delete == false || delete == null)
+                {
+
+                <input type="text" class="form-control" id="definput"   asp-for="TagName"   placeholder="لطفا نام تگ را وارد کنید"  >
+                }
+
+                <input type="hidden" asp-for="TagId">
+                <input type="hidden" asp-for="IsDelete">
+            </div>
+           @if (delete == true)
+           {
+               <button  type="submit" class="btn btn-danger" >حذف </button>
+           }
+           else
+           {
+               <button  type="submit" class="btn btn-palegreen" >ثبت </button>
+           }
+        </div>
+    </div>
+</form>
+
+
+
+

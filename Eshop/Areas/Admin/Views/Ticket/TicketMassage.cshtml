@@ -1,0 +1,82 @@
+﻿@using Application.Convertor
+@using Application.Security
+@using Domain.Models.Enums
+@using Domain.Models.Tickets
+@model Domain.Models.Tickets.TicketMassages
+@{
+    ViewData["Title"] = "TicketMassage";
+    var result = ViewData["Massage"] as List<TicketMassages>;
+    var ticket = ViewData["Ticket"] as Ticket ;
+}
+
+@section css
+{
+<link href="/Admin/assets/css/Custom.css" rel="stylesheet" />
+}
+
+<div style="margin-top: 100px" class="col-xl-12 col-lg-12 col-md-12">
+
+
+    <div class="ui-box-content">
+        <!-- start of tickets -->
+        <div class="tickets">
+            @foreach (var item in result)
+            {
+                <!-- start of ticket -->
+            <div class="ticket fa-num @((item.SenderId!=User.GetUserId())?"reply":"")" >
+                <div class="avatar"></div>
+                <div class="text">
+                   @item.Message
+                </div>
+                <div class="date"> @item.CreatDate.ToShamsi()</div>
+                @{
+                    if (ticket.IsReadByOwner&& item.SenderId!=User.GetUserId())
+                    {
+                        <br/>
+                        <span class="date"> Is Read</span>
+                    }
+                }
+               
+            </div>
+            <!-- end of ticket -->
+            <!-- start of ticket -->
+            
+            }
+        </div>
+        <hr />
+        <!-- end of tickets -->
+        <div class="border-bottom my-4"></div>
+        @if (ticket.Status != TicketStatusEnum.Closed)
+        {
+
+
+            <div class="ui-box-title p-0 mb-4">
+                ارسال پاسخ
+            </div>
+            <!-- start of add-ticket-form -->
+            <form method="post" asp-area="Admin" asp-controller="Ticket" asp-action="AddTicketMassage" class="add-ticket-form">
+                <div class="row">
+                    <div class="col-12">
+                        <input type="hidden" value="@ticket.Id" name="ticketId"/>
+                        <!-- start of form-element -->
+                        <div class="form-element-row mb-5">
+                            <label class="label">پیام</label>
+
+                            <textarea  name="tickemassage" style="margin: 20px"    rows="5"  class="form-control " placeholder="متن پیام"></textarea>
+                        </div>
+                        <!-- end of form-element -->
+                    </div>
+
+                    <div style="margin: 20px" class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary">ارسال پاسخ <i class="ri-ball-pen-line ms-2"></i></button>
+                    </div>
+                </div>
+            </form>
+            <!-- end of add-ticket-form -->
+        }
+    </div>
+</div>
+
+
+
+

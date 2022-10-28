@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Domain.ViewModels.Product.AddImageGalleryViewModel
+
+
+<div class="row">
+    <div style="margin-top: 110px;margin-right: 200px" class="col-lg-6 col-sm-6 col-xs-12">
+        <div class="widget radius-bordered">
+            <form method="post" asp-controller="ProductGallery" asp-action="AddImage" enctype="multipart/form-data">
+                <input type="hidden" asp-for="ProductId"/>
+                <div class="widget-header">
+                    <span class="widget-caption">File Uploads</span>
+                </div>
+                <div class="widget-body">
+
+                    <hr class="wide">
+                    <div class="">
+
+                        <h5>افزودن عکس</h5>
+
+                        <div class="form-group">
+                            <img id="imgProduct" style="max-width: 350px;" class="thumbnail" src="/Images/img/NoProductImage.png"/>
+                            <hr class="wide">
+
+                            <span class="file-input btn btn-primary btn-file">
+                                Browse <input type="file" asp-for="Image" id="imgproductUp">
+                            </span>
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" asp-for="IsDefault" class="colored-blue" checked="checked">
+                                <span class="text">عکس پیشفرض</span>
+                            </label>
+                        </div>
+
+                        <input type="submit" class="btn btn-success" value="ثبت"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Section
+{
+    
+    <script>
+    
+         function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgProduct').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgproductUp").change(function () {
+            readURL(this);
+        });
+    </script>
+}

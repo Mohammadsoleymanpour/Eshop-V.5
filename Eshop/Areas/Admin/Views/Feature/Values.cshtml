@@ -1,0 +1,79 @@
+﻿@model List<Domain.Models.Product.FeatureValue>
+@{
+    ViewData["Title"] = "Values";
+}
+
+
+<div style="margin: 20px" class="row ">
+    <form id="indexForm">
+        
+        <div class="col-xs-12 col-md-12">
+            <div style="margin-top: 80px" class="widget">
+                <div class="widget-header bordered-bottom bordered-yellow">
+                    <span class="widget-caption">لیست مقادیر ویژگی ها</span>
+                    <div class="widget-buttons">
+                        <a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                        <a href="#" data-toggle="collapse">
+                            <i class="fa fa-minus"></i>
+                        </a>
+                        <a href="#" data-toggle="dispose">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-body no-padding">
+                    <div id="searchable_wrapper" class="dataTables_wrapper form-inline">
+                        
+                        <div id="searchable_filter" class="dataTables_filter">
+
+                            <a style="margin: 10px" href="/Admin/AddFeatureValue/@ViewBag.Id" class="btn btn-darkorange shiny btn-label">افزودن ویژگی</a>
+
+                        </div>
+
+                        <table style="margin-left: 20px" class="table table-bordered table-hover table-striped dataTable" id="searchable" role="grid" aria-describedby="searchable_info">
+                            <thead class="bordered-darkorange">
+                                <tr role="row">
+                                    <th class="sorting" tabindex="0" aria-controls="searchable" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="width: 233px;">نام ویژگی</th>
+
+                                    <th class="sorting_asc" tabindex="0" aria-controls="searchable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Browser: activate to sort column descending" style="width: 233px;">دستورات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr role="row" class="odd">
+                                        <td class=" sorting_1">@item.Value</td>
+                                       
+                                        <td class="center ">
+
+                                            <a href="/Admin/DeleteFeatureValue/@item.Id" class="btn btn-danger btn-sm">حذف</a>
+                                            <a href="/Admin/EditFeatureValue/@item.Id" class="btn btn-warning btn-sm">ویرایش</a>
+                                            
+                                        
+                                        </td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                        <div class="row DTTTFooter">
+                            <div class="col-sm-6">
+                                <div class="dataTables_info" id="searchable_info" role="status" aria-live="polite">Showing 1 to 10 of 10 entries</div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+

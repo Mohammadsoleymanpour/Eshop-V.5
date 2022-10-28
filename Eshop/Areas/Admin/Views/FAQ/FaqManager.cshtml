@@ -1,0 +1,43 @@
+﻿@model Domain.ViewModels.FAQ.AddOrEditFaqViewModel
+@{
+    
+}
+
+
+<form asp-area="admin" asp-controller="FAQ" asp-action="@(ViewBag.Edit!=null&&ViewBag.Edit==true?"EditFaq":"DeleteFaq")">
+ <div style="margin-top: 110px" class="col-lg-8 col-sm-6 col-xs-12">
+            <div class="widget">
+                <div class="widget-header bordered-bottom bordered-pink">
+                    <span class="widget-caption">افزودن نقش</span>
+                    <input type="hidden" asp-for="Id"/>
+                </div>
+                <div class="widget-body">
+                    <div id="horizontal-form">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" asp-for="Qusetion" placeholder="پرسش" class="form-control">
+                                <div class="horizontal-space"></div>
+                            </div>
+                                   <div class="col-md-6">
+                                <input type="text" asp-for="Answer" placeholder="جواب" class="form-control">
+                                <div class="horizontal-space"></div>
+                            </div>
+                        </div>
+
+                        @if(ViewBag.Edit!=null&&ViewBag.Edit==true){
+                              <button type="submit" class="btn btn-palegreen btn-lg shiny">ثبت</button>
+                        }
+                        else{
+                                         <button type="submit" class="btn btn-danger btn-lg shiny">حذف</button>
+                        }
+
+                      
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        </form>

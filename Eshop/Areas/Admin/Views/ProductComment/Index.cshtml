@@ -1,0 +1,102 @@
+﻿@using Domain.ViewModels.Product_Comment
+@using Microsoft.OpenApi.Extensions
+@using Application.Security
+
+@model Domain.ViewModels.Product_Comment.FilterProductCommentsViewModel
+@{
+    ViewData["Title"] = "کامنت ها";
+}
+
+<div style="margin-top: 100px" class="col-xs-6 col-md-12 position-relative">
+    <form method="post">
+
+        <div class="row">
+            <div id="dataTables-example_filter" class="dataTables_filter">
+                <div class=" col-sm-5">
+                    <div class="form-group" style="margin-top: 10px">
+                        <span class="input-icon inverted">
+                            <input type="search" name="filteremail" asp-for="SenderEmail" class="form-control input-sm" placeholder="جست و جو بر اساس ایمیل">
+                            <i class="glyphicon glyphicon-search bg-blue"></i>
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class=" col-sm-5">
+                    <div class="form-group" style="margin-top: 10px">
+                        <span class="input-icon inverted">
+                            <select asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(CommentStatus.CommentFilterStatus))"></select>
+                            <i class="glyphicon glyphicon-search bg-blue"></i>
+                        </span>
+
+                    </div>
+
+                </div>
+                <div style="margin: 10px;">
+                    <button type="submit" class="btn btn-blue">جست و جو</button>
+                    <a href="/Comments/@Model.ProductId" class="btn btn-blue">حذف فیلتر</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div style="margin: 10px;">
+        </div>
+        <div class="well with-header  with-footer">
+            <div class="header bg-blue">
+                لیست نظرات محصول
+            </div>
+            <table class="table table-hover">
+                <thead class="bordered-darkorange">
+                    <tr>
+                        <th>
+                            ایمیل
+                        </th>
+                        <th>
+
+                            وضعیت
+                        </th>
+
+                        <th>
+                            دستورات
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Entities)
+                    {
+
+                        <tr>
+                            <td>
+                                <h3>
+                                    @item.User.Email
+                                </h3>
+                            </td>
+                            <td>
+                                <h3>
+                                    @item.Status.GetEnumDisPlayName()
+                                </h3>
+                            </td>
+                           
+                            <td>
+                                <a class="btn btn-primary" href="/Admin/Comment/@item.Id">مشاهده پیام</a>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+
+            <div class="footer">
+                <code>class="table table-hover"</code>
+            </div>
+
+        </div>
+
+
+    </form>
+
+</div>
+

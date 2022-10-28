@@ -1,0 +1,41 @@
+﻿@model Domain.ViewModels.Shared.PagingViewModel
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-12">
+        <nav class="border-top py-4">
+            <!-- start of pagination -->
+            <ul class="pagination justify-content-center fa-num">
+                @if (Model.StartPage < Model.Page)
+                {
+                    <li class="page-item">
+                        <a class="page-link"  onclick="OnClick(@(Model.Page - 1))" aria-label="Previous">
+                            <i class="ri-arrow-right-s-line"></i>
+                        </a>
+                    </li>
+                }
+                @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+                {
+                    if (Model.Page == i)
+                    {
+                        <li class="page-item active"><a class="page-link " >@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" onclick="OnClick(@i)" >@i</a></li>
+                    }
+                }
+            @if (Model.EndPage > Model.Page)
+            {
+                <li class="page-item">
+                    <a class="page-link" onclick="OnClick(@(Model.Page + 1))" aria-label="Next">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </a>
+                </li>
+            }
+            </ul>
+            <!-- end of pagination -->
+        </nav>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+﻿@model Task<List<Domain.Models.Product.ProductGallery>>
+@{
+    var id = ViewBag.productId;
+}
+
+<div style="margin-top: 110px" class="col-xs-12 col-md-12">
+    <div class="widget">
+        <div class="widget-header ">
+            <span class="widget-caption">Editable DataTable</span>
+            <div class="widget-buttons">
+                <a href="#" data-toggle="maximize">
+                    <i class="fa fa-expand"></i>
+                </a>
+                <a href="#" data-toggle="collapse">
+                    <i class="fa fa-minus"></i>
+                </a>
+                <a href="#" data-toggle="dispose">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+
+            <div id="editabledatatable_wrapper" class="dataTables_wrapper form-inline no-footer">
+                <div class="DTTT btn-group">
+                    <a href="/Admin/AddImageProduct/@id" class="btn btn-default DTTT_button_print" id="ToolTables_editabledatatable_1" title="View print view" tabindex="0" aria-controls="editabledatatable"><span>افزودن عکس</span></a>
+                </div>
+
+                <table class="table table-striped table-hover table-bordered dataTable no-footer" id="editabledatatable" role="grid" aria-describedby="editabledatatable_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="editabledatatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
+                                                    Username
+                                                : activate to sort column descending" style="width: 187px;">
+                                عکس
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="editabledatatable" rowspan="1" colspan="1" aria-label="
+                                                    Full Name
+                                                : activate to sort column ascending" style="width: 286px;">
+                                پیشفرض
+                            </th>
+
+                            <th class="sorting" tabindex="0" aria-controls="editabledatatable" rowspan="1" colspan="1" aria-label="
+                                                    Notes
+                                                : activate to sort column ascending" style="width: 199px;">
+                                دستورات
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in await Model)
+                        {
+
+                            <tr role="row" class="odd">
+                                <td class="center">
+                                    <img style="max-width: 100px" class="thumbnail" src="/Images/thumb/@item.ImageName" />
+                                </td>
+                                <td>
+                                    @if (@item.IsDefault)
+                                    {
+                                        <div class="">
+                                            <p class="success">
+                                                <i class="glyphicon glyphicon-ok-circle fa-2x "></i>
+                                            </p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="">
+                                            <p class="danger">
+                                                <i class="glyphicon glyphicon-remove-circle fa-2x "></i>
+                                            </p>
+                                        </div>
+                                    }
+                                </td>
+
+
+                                <td>
+                                    <a href="/Admin/EditImage/@item.Id" class="btn btn-info btn-lg edit"><i class="fa fa-edit"></i> ویرایش</a>
+                                    <a href="/Admin/DeleteImage/@item.Id" class="btn btn-danger btn-lg delete"><i class="fa fa-trash-o"></i> حذف</a>
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+                <div class="row DTTTFooter">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

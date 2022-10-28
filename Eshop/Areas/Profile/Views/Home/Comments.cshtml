@@ -1,0 +1,65 @@
+﻿@using Application.Convertor
+@model Domain.ViewModels.Product.CommentViewModel
+@{
+    ViewData["Title"] = "Comments";
+}
+
+<div class="ui-box bg-white mb-5">
+    <form id="indexForm">
+    <div class="ui-box-title">نظرات</div>
+    <div class="ui-box-content comments">
+        <input type="hidden" asp-for="Page" id="page"/>
+        <div class="row">
+            @foreach (var item in  Model.Entities)
+            {
+
+                <div class="col-lg-6 mb-4">
+                    <div class="border rounded p-3">
+                        <a href="#" class="d-flex align-items-center link pb-3">
+                            <img src="/images/thumb/@item.Product.ProductGalleries.FirstOrDefault(c => c.IsDefault).ImageName" width="60" alt="">
+                            <span class="fs-7 fw-bold">
+                                @item.Product.Title
+                            </span>
+                        </a>
+                        <!-- start of comment -->
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span>@item.CreatDate.ToShamsi()</span>
+                            </div>
+                            <div class="comment-body">
+                                <p>
+                                    @item.Comment
+                                </p>
+
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="comment-footer">
+                                    <button class="comment-like" disabled="">۷</button>
+                                    <button class="comment-dislike" disabled="">۲</button>
+                                </div>
+                                <a href="/Profile/Comment/Delete/@item.Id" class="btn btn-link text-danger">حذف <i class="ri-delete-bin-5-line ms-1"></i></a>
+                            </div>
+
+                        </div>
+                        <!-- end of comment -->
+                    </div>
+                </div>
+            }
+
+        </div>
+                            <partial name="_Paging" model="@Model.GetCurrentPaging()"/>
+    </div>
+    </form>
+</div>
+
+
+@section Section
+{
+    <script>
+    function OnClick(pageId) {
+    $("#page").val(pageId)
+    $("#indexForm").submit();
+
+    }
+</script>
+}

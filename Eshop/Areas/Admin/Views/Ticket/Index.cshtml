@@ -1,0 +1,191 @@
+﻿@using Domain.Models.Enums
+@using Domain.ViewModels.Ticket
+@using Eshop.Common
+@model Domain.ViewModels.Ticket.UserTicketsListViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div style="margin-top: 100px" class="row">
+  
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header ">
+                <span class="widget-caption">لیست تیکت های سایت</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    <a href="#" data-toggle="dispose">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body">
+                <form id="indexForm">
+                    <input type="hidden" asp-for="Page" id="page" />
+                    <div id="simpledatatable_wrapper" class="dataTables_wrapper form-inline no-footer">
+
+                        <div id="simpledatatable_filter" class="dataTables_filter col-12">
+
+                            <label>
+                                <input type="search" asp-for="Title" class="form-control " placeholder="جست و جو" aria-controls="simpledatatable">
+
+                                <select asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(FilterTicketStatus))" aria-controls="simpledatatable" class="form-control ">
+                                </select>
+
+                                <select asp-for="Parts" asp-items="Html.GetEnumSelectList(typeof(FilterTicketPart))" aria-controls="simpledatatable" class="form-control ">
+                                </select>
+
+                                <select asp-for="Levels" asp-items="Html.GetEnumSelectList(typeof(FilterTicketLevels))" aria-controls="simpledatatable" class="form-control ">
+                                </select>
+
+                            </label>
+                            <input type="submit" class="btn btn-success shiny" value="جست و جو">
+                        </div>
+                        <div class="dataTables_length col-12" id="simpledatatable_length">
+                            <label>
+
+
+                            </label>
+                        </div>
+
+
+                        <table class="table table-striped table-bordered table-hover dataTable no-footer" id="simpledatatable" role="grid" aria-describedby="simpledatatable_info" style="width: 1231px;">
+                            <thead>
+                            <tr role="row">
+
+                                <th class="sorting" tabindex="0" aria-controls="simpledatatable" rowspan="1" colspan="1" aria-label="
+                                                    Username
+                                                : activate to sort column ascending" style="width: 237px;">
+                                    عنوان
+                                </th>
+                                <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="
+                                                    Email
+                                                " style="width: 451px;">
+                                    ایمیل
+                                </th>
+                                <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="
+                                                    Email
+                                                " style="width: 451px;">
+                                    بخش
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="simpledatatable" rowspan="1" colspan="1" aria-label="
+                                                    Points
+                                                : activate to sort column ascending" style="width: 160px;">
+                                    تاریخ تیکت
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="simpledatatable" rowspan="1" colspan="1" aria-label="
+                                                    Points
+                                                : activate to sort column ascending" style="width: 160px;">
+                                    وضعیت
+                                </th>
+                                <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="
+                                                    Joined
+                                                " style="width: 266px;">
+                                    دستورات
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model.Entities)
+                            {
+                                <tr role="row" class="odd">
+
+                                    <td>
+                                        @item.Title
+                                    </td>
+                                    <td>
+                                        @item.User.Email
+                                    </td>
+                                    <td>
+                                        @switch (item.Part)
+                                        {
+                                            case TicketParts.Accounting:
+                                                <p>حسابداری</p>
+                                                break;
+                                            case TicketParts.Management:
+                                                <p>مدیریت</p>
+                                                break;
+                                            case TicketParts.Suggestion:
+                                                <p>پیشنهاد</p>
+                                                break;
+                                            case TicketParts.Warranty:
+                                                <p>خدمات پس از فروش</p>
+                                                break;
+                                            case TicketParts.etc:
+                                                <p>سایر موضوعات</p>
+                                                break;
+                                            case TicketParts.Complaint:
+                                                <p>انتقاد و شکایت</p>
+                                                break;
+                                            case TicketParts.Track:
+                                                <p>پیگیری سفارش</p>
+                                                break;
+
+                                        }
+                                    </td>
+                                    <td>
+                                        @item.CreatDate
+                                    </td>
+                                    <td>
+                                        @if (item.Status == TicketStatusEnum.Pending)
+                                        {
+                                            <span class="badge bg-danger rounded-pill">خوانده نشده</span>
+                                        }
+                                        @if (item.Status == TicketStatusEnum.Answered)
+                                        {
+                                            <span class="badge bg-success rounded-pill">خوانده شده</span>
+                                        }
+                                        @if (item.Status == TicketStatusEnum.Closed)
+                                        {
+                                            <span class="badge bg-primary rounded-pill"> بسته شده</span>
+                                        }
+                                    </td>
+                                    <td class="center ">
+                                        <Authrize permission-id="Permissions.AnswerTicket">
+
+                                        <a href="/Admin/TicketMassage/@item.Id" class="btn btn-primary ">پاسخ</a>
+                                        </Authrize>
+                                        @if (item.Status != TicketStatusEnum.Closed)
+                                        {
+                                            <Authrize permission-id="Permissions.CloseTicket">
+
+                                            <a href="/Admin/CloseTicket/@item.Id" class="btn btn-danger ">بستن</a>
+                                            </Authrize>
+                                        }
+                                    </td>
+                                </tr>
+
+                            }
+
+                            </tbody>
+                        </table>
+                        <div class="row DTTTFooter">
+                            <div class="col-sm-6">
+                                <div class="dataTables_info" id="simpledatatable_info" role="status" aria-live="polite">Showing 1 to 5 of 25 entries</div>
+                            </div>
+                            <partial name="_Paging" model="@Model.GetCurrentPaging()"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Section
+{
+<script>
+    function OnClick(pageId) {
+    $("#page").val(pageId)
+    $("#indexForm").submit();
+
+    }
+</script>
+}
+

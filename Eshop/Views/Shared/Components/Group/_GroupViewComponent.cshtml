@@ -1,0 +1,43 @@
+﻿@using Application.Interface
+@inject IProductService _ProductService
+
+<div class="container">
+    <div class="d-flex align-items-center">
+        <div class="vertical-menu">
+            <a href="#" class="vertical-menu-btn">دسته بندی کالاها <i class="ri-apps-fill icon"></i></a>
+            <div class="vertical-menu-items">
+                <ul>
+                    @foreach (var item in await _ProductService.GetAllProductsCategoryAsync())
+                    {
+                        <li class="mega-menu-category">
+                            <a href="#">@item.Title</a>
+                               
+                            <ul class="mega-menu">
+                                @foreach (var subItem in await _ProductService.GetAllSubProductCategoryAsync(item.Id))
+                                {
+                                    <li class="parent" ><a  href="/FilterProduct/@subItem.Id">@subItem.Title</a></li>
+                                }
+                                      
+                            </ul>
+                               
+                            
+                        </li>
+                    }
+                      
+                </ul>
+            </div>
+        </div>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/">خانه</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Faq">پرسش های متداول</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ContactUs">تماس با ما</a>
+            </li>
+           
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+﻿
+@model Domain.ViewModels.Product.EditFeatureValueViewModel
+@{
+    ViewData["Title"] = "DeleteFeatureValue";
+}
+
+<div style="margin-top: 110px" class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-left bordered-darkorange">
+                <span class="widget-caption"> افزودن مقدار</span>
+            </div>
+            <div class="widget-body bordered-left bordered-warning">
+                <form method="post" asp-controller="Feature" asp-action="DeleteFeatureValue" class="form-inline" role="form">
+                    <input type="hidden" asp-for="FeatureId"/>
+                    <input type="hidden" asp-for="Id"/>
+                   
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">مقدار:</label>
+                        <input type="text" asp-for="Title" readonly="readonly"  class="form-control" id="exampleInputPassword2" >
+                    </div>
+                    
+                    <button type="submit" class="btn btn-danger shiny">حذف</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

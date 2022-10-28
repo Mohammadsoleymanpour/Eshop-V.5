@@ -1,0 +1,45 @@
+﻿@model Domain.ViewModels.ProductCategory.EditOrAddCategoryProduct
+@{
+    ViewData["Title"] = " زیر گروه";
+    bool? delete = ViewBag.IsDeleteing as bool?;
+    bool? edit = ViewBag.IsEditing as bool?;
+
+}
+
+    <div style="margin-top: 100px" class="container">
+<form method="post" asp-area="admin" asp-controller="ProductCategory" asp-action="@(edit==true?"EditCategory":(delete==true?"DeleteCategory":"AddCategory"))">
+        <div class="row">
+            <div class="form-group">
+                <label for="definpu">نام دسته بندی</label>
+               
+
+                @if (edit == true)
+                {
+                 
+                <input type="text" class="form-control" id="definput" value="@Model.CategoryName"  asp-for="CategoryName"   placeholder="لطفا نام دسته بندی را وارد کنید"  >
+                }
+                @if (delete == true)
+                {
+                    <input type="text" class="form-control" id="definput" value="@Model.CategoryName" asp-for="CategoryName" placeholder="لطفا نام دسته بندی را وارد کنید" readonly="readonly">
+                }
+                @if (delete == null && edit == null)
+                {
+
+                    <input type="text" class="form-control" id="definput" asp-for="CategoryName"  placeholder="لطفا نام دسته بندی را وارد کنید">
+                }
+
+                <input type="hidden" asp-for="CategoryId">
+                <input type="hidden" asp-for="ParentId">
+            </div>
+           @if (delete == true)
+           {
+               <button  type="submit" class="btn btn-danger" >حذف </button>
+           }
+           else
+           {
+               <button  type="submit" class="btn btn-palegreen" >ثبت </button>
+           }
+        </div>
+</form>
+    </div>
+

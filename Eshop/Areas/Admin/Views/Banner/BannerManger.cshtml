@@ -1,0 +1,89 @@
+﻿@using Domain.Models.Enums
+@using Domain.ViewModels.Banner
+@using Application.Security
+@model AddOrEditBannerViewModel
+
+<div class="row">
+    <div style="margin-top: 110px;margin-right: 200px" class="col-lg-6 col-sm-6 col-xs-12">
+        <div class="widget radius-bordered">
+            <form method="post" asp-controller="Banner" asp-action="@(ViewBag.Delete!=null&&ViewBag.Delete==true?"DeleteBanner":(ViewBag.Edit!=null&&ViewBag.Edit==true?"EditBanner":"AddBanner"))" enctype="multipart/form-data">
+
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="ImageName" />
+                <input type="hidden" asp-for="Image" />
+               
+                
+                <div class="widget-header">
+                    <span class="widget-caption">آپلود بنر</span>
+                </div>
+                <div class="widget-body">
+
+                    <hr class="wide">
+                    <div class="">
+                        <h5>افزودن عکس</h5>
+                        <div class="form-group">
+                            <img id="imgProduct" style="max-width: 350px;" class="thumbnail" src=@(ViewBag.AddBanner!=null&&ViewBag.AddBanner==true?"/Images/img/NoProductImage.png":$"/Images/banners/{Model.ImageName}") />
+                            <hr class="wide">
+
+                            <span class="file-input btn btn-primary btn-file">
+                                انتخاب <input type="file" asp-for="Image" id="imgproductUp">
+                            </span>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" asp-for="Link"  placeholder="عنوان" class="form-control">
+                            <div class="horizontal-space"></div>
+                        </div>
+                        </div>
+                        <div class="select2">
+                            <label>
+                               <select class="select2" asp-for="Position" asp-items="@Html.GetEnumSelectList(typeof(BannerPosition))"></select>
+                                <span class="text">موقعیت بنر</span>
+                                <span asp-validation-for="Position" class="text-danger" ></span>
+                            </label>
+                        </div>
+                         <div class="select2">
+                            <label>
+                               <select class="select2" asp-for="Size" asp-items="@Html.GetEnumSelectList(typeof(BannerCol))"></select>
+                                <span class="text">سایز بنر</span>
+                            </label>
+                        </div>
+
+                        @if(ViewBag.Delete!=null && ViewBag.Delete){
+                            
+                        <input type="submit" class="btn btn-danger" value="حذف"/>
+                        }
+                        else{
+                            
+                        <input type="submit" class="btn btn-success" value="ثبت"/>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Section
+{
+    
+    <script>
+    
+         function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgProduct').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgproductUp").change(function () {
+            readURL(this);
+        });
+    </script>
+}

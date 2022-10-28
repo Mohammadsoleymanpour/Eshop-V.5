@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "ActiveAccount";
+}
+
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">یکتا کالا</a></li>
+        <li class="breadcrumb-item active" aria-current="page">فعالسازی حساب کاربری</li>
+    </ul>
+</nav>
+
+<div class="container">
+    @if (ViewBag.IsActive)
+    {
+        <main class="page-content page-auth">
+            <!-- start of auth-container -->
+            <div class="auth-container">
+                <div class="auth-title mb-3">خوش آمدید</div>
+                <!-- start of auth-box -->
+                <div class="auth-box ui-box">
+                    <div class="fs-6 fw-bold text-dark text-center mb-3">حساب کاربری شما با موفقیت فعال شد</div>
+                    <div class="fs-7 fw-bold text-muted text-center mb-3">
+                        اکنون می‌توانید به صفحه‌ای که در آن بودید بازگردید و یا با تکمیل اطلاعات حساب کاربری خود به کلیه
+                        امکانات و سرویس‌ها و سرویس‌های وابسته به آن دسترسی داشته باشید
+                    </div>
+                    <a href="/Login" class="btn btn-block btn-primary mb-3"><i class="ri-user-6-fill me-2"></i> ورود به سایت
+                       </a>
+                    <div class="text-center">
+                     
+                    </div>
+                </div>
+                <!-- end of auth-box -->
+            </div>
+            <!-- end of auth-container -->
+        </main>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <p>   حساب کاربری با مشخصات وارد شده یافت نشد </p>
+       
+        </div>
+    }
+</div>
+

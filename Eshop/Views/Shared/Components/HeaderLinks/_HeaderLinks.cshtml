@@ -1,0 +1,11 @@
+﻿@using Domain.ViewModels.DynamicLinks
+@model LinksForSiteViewModel
+@if (Model != null)
+{
+    foreach (var link in Model.Links)
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="@link.LinkUrl">@link.Title</a>
+        </li>
+    }
+}

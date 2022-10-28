@@ -1,0 +1,211 @@
+﻿@using Application.Interface
+@using Application.Security
+@using Application.StaticTools
+@using Domain.Models.Banner
+@using Domain.Models.Enums
+@using Domain.Models.Role
+@using Domain.ViewModels.DynamicLinks
+@using Domain.ViewModels.Product
+@using Eshop.Common
+@using Eshop.Helpers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    var banners = ViewData["Banners"] as List<Banner>;
+
+}
+
+@if (banners != null && banners.Any(c => c.Position == Domain.Models.Enums.BannerPosition.TopMost))
+{
+    <div class="alert banner-container alert-dismissible fade show" role="alert">
+        <a href="@banners.FirstOrDefault(c=>c.Position==BannerPosition.Top).Link" class="banner-placement rounded-0"
+       style="background-image: url(/Images/banners/@banners.FirstOrDefault(c=>c.Position == Domain.Models.Enums.BannerPosition.TopMost).ImageName);height: 60px;"></a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+<div class="page-header--top">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="page-header--top-right">
+                <div class="notification-container notification-light">
+                    <div class="swiper notification-swiper-slider mb-5">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            <div class="swiper-slide">
+                                <div class="notification-item">
+                                    <div class="notification-item--text">خوش آمدید 👋</div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="notification-item">
+                                    <div class="notification-item--text">
+                                        این فروشگاه اینترنتی صرفا به منظور نمونه کار است
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-header--top-left">
+                <ul class="nav nav-light justify-content-end">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/faq">پرسش های متداول</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ContactUss">تماس با ما</a>
+                    </li>
+
+                    @await Component.InvokeAsync("HeaderLinks")
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-header--middle">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center flex-grow-1 pe-3">
+                <div class="logo-container logo-box me-3">
+                    <a href="/" class="logo">
+                        <img src="/site/theme-assets/images/logo.svg" width="120" alt="">
+                        <span class="logo-text">بررسی،انتخاب و خرید آنلاین</span>
+                    </a>
+                </div>
+                <div class="search-container">
+                    <form asp-controller="Product" asp-action="ProductFilter" method="get" class="search-form">
+                        <input type="text" name="name" id="searche" class="form-control search-field" placeholder="جستجو کنید..">
+                        <button class="btn btn-primary btn-search btn-action">
+                            <i class="ri-search-2-line"></i>
+                        </button>
+                        <button class="btn btn-primary btn-close-search-result btn-action d-none">
+                            <i class="ri-close-line"></i>
+                        </button>
+                    </form>
+                    @*<div class="search-result-container">
+                    <div class="search-result-tags-container">
+                    <div class="search-result-tags-label">
+                    <i class="ri-fire-line"></i> بیشترین
+                    جستجوهای اخیر
+                    </div>
+                    <ul class="search-result-tags">
+                    </ul>
+                    </div>
+                    <div class="border-bottom my-3"></div>
+                    <ul class="search-result-items">
+                    </ul>
+                    </div>*@
+                </div>
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="user-options">
+                    <div class="user-option user-option--account">
+                        <a href="/profile" class="user-option-btn user-option-btn--account">
+                            <i class="ri-user-fill icon"></i>
+                            <i class="ri-arrow-down-s-fill icon fs-7 text-muted"></i>
+                        </a>
+                        <div class="user-option--dropdown user-option--dropdown-right">
+                            <div class="profile-user-info ui-box">
+                                <div class="profile-detail">
+                                    <div class="d-flex align-items-center">
+                                        <div class="profile-avatar me-3">
+                                            <img src="/site/theme-assets/images/avatar/default.png" alt="avatar">
+                                        </div>
+                                        <div class="profile-info">
+                                            <a href="/profile" class="text-decoration-none text-dark fw-bold mb-2">
+                                                @User.Identity.Name.SetUnReadableEmail()
+                                            </a>
+                                            @*  <div class="text-muted fs-7 fw-bold">۰۹xxxxxxxxx</div>*@
+                                        </div>
+                                    </div>
+                                    @*  <div class="user-options">
+                                <ul>
+                                <li>
+                                <span class="label">کیف پول</span>
+                                <span class="detail">
+                                <span class="d-block">
+                                ۰ <span class="currency fs-7 fw-bold">تومان</span>
+                                </span>
+                                <a href="#"
+                                class="link border-bottom-0 text-info fs-7 fw-bold">
+                                افزایش
+                                موجودی <i class="ri-arrow-left-s-line"></i>
+                                </a>
+                                </span>
+                                </li>
+                                <li>
+                                <span class="label">باشگاه مشتریان</span>
+                                <span class="detail">
+                                <span class="d-block">
+                                ۰ <span class="score text-muted fs-7">امتیاز</span>
+                                </span>
+                                </span>
+                                </li>
+                                </ul>
+                                </div>*@
+                                </div>
+                                <ul class="nav nav-items-with-icon flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Profile">
+                                            <i class="nav-link-icon ri-file-list-3-line"></i>
+                                            حساب کاربری
+                                        </a>
+                                    </li>
+                                    <Authrize permission-id="Permissions.Admin">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/Admin/">
+                                                <i class="nav-link-icon ri-copper-coin-fill"></i>
+                                                پنل ادمین
+                                            </a>
+                                        </li>
+                                    </Authrize>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Logout">
+                                            <i class="nav-link-icon ri-logout-box-r-line"></i>
+                                            خروج
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-option">
+                        <a href="/Profile/FavoriteProduct" class="user-option-btn user-option-btn--account">
+                            <i class="ri-heart-3-fill icon"></i>
+
+                        </a>
+                    </div>
+                    @await Component.InvokeAsync("Order",User.GetUserId())
+                </div>
+            }
+            else
+            {
+                <ul class="nav nav-pills nav-tabs align-items-center mb-4" id="sort-tab" role="tablist">
+
+                    <li class="nav-item" role="presentation">
+                        <a href="/Register" class="nav-link " id="most-visited-tab" aria-controls="most-visited" aria-selected="true">ثبت نام</a>
+                    </li>
+                    /
+                    <li class="nav-item" role="presentation">
+                        <a href="/Login" class="nav-link" id="best-selling-tab" aria-controls="best-selling" aria-selected="false">
+                            ورود
+                        </a>
+                    </li>
+
+                </ul>
+            }
+
+        </div>
+    </div>
+</div>
+
+<div class="page-header--bottom">
+    @await Component.InvokeAsync("Group")
+</div>

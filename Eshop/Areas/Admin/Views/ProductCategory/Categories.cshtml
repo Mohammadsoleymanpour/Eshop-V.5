@@ -1,0 +1,97 @@
+﻿@using Eshop.Common
+@model Domain.ViewModels.ProductCategory.FilterCategoryProduct
+@{
+    ViewData["Title"] = "Categories";
+}
+<form id="indexForm">
+
+    <input asp-for="Page" type="hidden" id="page" />
+
+
+    <div class="widget">
+        <div class="col-md-12 col-xs-12">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">Basic Form</span>
+            </div>
+            <div class="widget-body">
+                <div>
+
+                    <div id="searchable_filter" class="dataTables_filter">
+                        <label>
+                            <input type="search" asp-for="CategoryName" class="form-control input-sm" placeholder="جست و جو" aria-controls="searchable">
+                        </label>
+                        <input type="submit" class="btn btn-darkorange btn-sm shiny btn-label fa fa-search" value="جست و جو">
+                        <input type="submit" class="btn btn-darkorange btn-sm shiny btn-label fa fa-search" value="حذف فیلتر">
+                        <a asp-controller="ProductCategory" asp-action="AddCategory" type="submit" class="btn btn-azure shiny btn-label fa ">اضافه کردن دسته بندی جدید</a>
+                    </div>
+                </div>
+
+                <table class="table table-hover">
+                    <thead class="bordered-darkorange">
+                        <tr>
+                            <th>
+                                نام دسته بندی
+                            </th>
+
+                            <th>
+                                دستورات
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Entities)
+                        {
+                            <tr>
+                                <td>
+                                    <h4>
+                                        @item.Title
+                                    </h4>
+                                </td>
+
+
+
+                                <td>
+                                    <Authrize permission-id="@Permissions.DeleteCategory">
+                                        <a class="btn btn-danger" href="/Admin/DeleteCategory/@item.Id">حذف</a>
+                                    </Authrize>
+                                    <Authrize permission-id="@Permissions.ProductCategories">
+                                        <a class="btn btn-primary" href="/Admin/SubCategories/@item.Id">مشاهده زیرگروه ها</a>
+                                    </Authrize>
+                                    <Authrize permission-id="@Permissions.AddCategory">
+                                        <a class="btn btn-primary" href="/Admin/EditCategory/@item.Id">ویرایش دسته بندی</a>
+                                    </Authrize>
+
+
+
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+                <partial name="_Paging" model="@Model.GetCurrentPaging()" />
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+</form>
+
+
+@section Section
+    {
+    <script>
+        function OnClick(pageId) {
+
+            $("#page").val(pageId)
+            $("#indexForm").submit();
+
+        }
+    </script>
+}

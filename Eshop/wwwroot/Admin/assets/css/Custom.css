@@ -1,0 +1,64 @@
+﻿.ui-box .ui-box-content {
+    padding: 15px;
+}
+.tickets .ticket {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 20px;
+    max-width: 500px;
+}
+
+.tickets .ticket .avatar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.tickets .ticket .avatar::before {
+    content: "\F264";
+    font-family: remixicon;
+    font-size: 28px;
+}
+
+.tickets .ticket .avatar.staff::before {
+    content: "\F254";
+}
+
+.tickets .ticket .text {
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    padding: 15px;
+    line-height: 30px;
+}
+
+.tickets .ticket .date {
+    color: #979797;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.tickets .ticket.reply {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    margin-right: auto;
+}

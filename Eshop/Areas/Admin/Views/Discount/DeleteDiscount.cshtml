@@ -1,0 +1,68 @@
+﻿@using Domain.ViewModels.Order
+@model EditDiscountViewModel
+
+@{
+    ViewData["Title"] = "حذف کد تخفیف";
+}
+
+<div style="margin-top: 110px" class="col-lg-12 col-sm-6 col-xs-12">
+    <form method="post" asp-controller="Discount" asp-action="DeleteDiscount">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-pink">
+                <span class="widget-caption">حذف کد تخفیف</span>
+            </div>
+            <div class="widget-body">
+                <div id="horizontal-form">
+                    <input type="hidden" asp-for="Id"/>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" asp-for="DiscountCode" readonly="readonly" placeholder="کد تخفیف" class="form-control">
+                            <div class="horizontal-space"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" asp-for="DicountPercent" readonly="readonly" placeholder="درصد تخفیف" class="form-control">
+                            <div class="horizontal-space"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="number" asp-for="Useable" readonly="readonly" placeholder="تعداد قابل استفاده" class="form-control">
+                            <div class="horizontal-space"></div>
+                        </div>
+                      
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" asp-for="StartDate" readonly="readonly" id="test-date-id" class="form-control " style="border-radius: 5px" placeholder="تاریخ شروع">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" asp-for="EndDate" readonly="readonly" id="test-date-id2" class="form-control " style="border-radius: 5px" placeholder="تاریخ پایان">
+                        </div>
+                    </div>
+                </div>
+                <div class="horizontal-space"></div>
+
+                <button type="submit" class="btn btn-danger btn-lg shiny">ثبت</button>
+            </div>
+
+        </div>
+
+
+    </form>
+</div>
+
+@section Section
+    {
+    <script src="//code.jquery.com/jquery.min.js"></script>
+
+    <script src="/js/kamadatepicker.js"></script>
+    <script src="/js/kamadatepicker.holidays.js"></script>
+    <script src="/js/kamadatepicker.min.js"></script>
+
+    <script>
+         kamaDatepicker('test-date-id2', { buttonsColor: "red", forceFarsiDigits: true });
+        kamaDatepicker('test-date-id', { buttonsColor: "red", forceFarsiDigits: true });
+    </script>
+
+}

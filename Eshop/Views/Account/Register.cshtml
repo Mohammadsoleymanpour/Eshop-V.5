@@ -1,0 +1,147 @@
+﻿@using Domain.Models.Enums
+@model Domain.ViewModels.User.UserViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+
+<div class="page-wrapper">
+    <header class="page-mini-header py-4">
+        <div class="d-flex justify-content-center">
+            <div class="logo-container">
+                <a href="#" class="logo"><img src="./theme-assets/images/logo-dark.svg" width="120" alt=""></a>
+            </div>
+        </div>
+    </header>
+    <main class="page-content page-auth">
+        <!-- start of auth-container -->
+        <div class="auth-container">
+            <form method="post" asp-controller="Account" asp-action="Register">
+                <div class="auth-title mb-3">ورود / <a href="/Register">ثبت نام</a></div>
+                <!-- start of auth-box -->
+                <div class="auth-box ui-box">
+                    <!-- start of auth-form -->
+                    <form action="#" class="auth-form">
+                        <!-- start of form-element -->
+                        <div class="form-element-row mb-5">
+                            <input type="email" asp-for="Email" class="form-control" placeholder=" ایمیل">
+                            <span style="color: red" asp-validation-for="Email"></span>
+                            @{
+                                if (ViewBag.EmailExist != null)
+                                {
+                                    <p class="alert alert-danger">ایمیل وارد شده تکراری میباشد</p>
+                                }
+                            }
+                        </div>
+
+                        <div class="form-element-row mb-5">
+                            <input type="number" asp-for="PhoneNumber" class="form-control" placeholder="شماره موبایل ">
+                            <span style="color: red" asp-validation-for="PhoneNumber"></span>
+
+                        </div>
+
+
+                        <div class="form-element-row mb-5">
+                            <input type="password" asp-for="Password" class="form-control" placeholder="رمز عبور ">
+                            <span style="color: red" asp-validation-for="Password"></span>
+
+                        </div>
+
+                        <div class="form-element-row mb-5">
+                            <input type="password" asp-for="Repassword" class="form-control" placeholder="تکرار رمز عبور   ">
+                            <span style="color: red" asp-validation-for="Repassword"></span>
+
+                        </div>
+                        <!-- end of form-element -->
+                        <!-- start of form-element -->
+
+                        <div class="form-element-row mb-5">
+                            <input type="text" id="test-date-id" asp-for="BirthDay" class="form-control " style="border-radius: 5px" placeholder="تاریخ تولد">
+                            <span style="color: red" asp-validation-for="BirthDay"></span>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="form-element-row mb-5">
+                                <input class="form-check-input" asp-for="Gender" name="gender" value="@Gender.male" type="radio">
+                                <label class="form-check-label">مرد</label>
+                                <input class="form-check-input" asp-for="Gender" name="gender" value="@Gender.female" type="radio">
+                                <label class="form-check-label">زن</label>
+                                <span style="color: red" asp-validation-for="Gender"></span>
+
+                            </div>
+                        </div>
+                       
+
+
+                        <div class="form-element-row mb-3">
+
+                            <input type="submit" class="btn btn-primary" value="ثبت نام" />
+                        </div>
+                        <!-- end of form-element -->
+                        <!-- start of form-element -->
+                        <div class="form-element-row">
+                            <div>
+                                با ورود و یا ثبت نام در سایت شما
+                                <a href="#" class="link">
+                                    شرایط و
+                                    قوانین
+                                </a> استفاده
+                                از تمام سرویس های
+                                سایت و <a href="#" class="link">قوانین حریم خصوصی</a> آن را می‌پذیرید.
+                            </div>
+                        </div>
+                        <!-- end of form-element -->
+                    </form>
+                    <!-- end of auth-form -->
+                </div>
+                <!-- end of auth-box -->
+            </form>
+        </div>
+        <!-- start of auth-container -->
+    </main>
+    <footer class="page-mini-footer">
+        <div class="d-flex justify-content-center py-5">
+            <div class="logo-container">
+                <a href="#" class="logo"><img src="./theme-assets/images/logo-dark.svg" width="120" alt=""></a>
+            </div>
+        </div>
+        <div class="copy-right bg-light py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mb-md-0 mb-4">
+                        <div class="text-muted text-md-start text-center">
+                            کليه حقوق اين سايت متعلق به echo_designer
+                            می‌باشد.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-muted text-md-end text-center">echo_designer - 2021 © Copyright</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+@section Section
+{
+<script src="//code.jquery.com/jquery.min.js"></script>
+
+<script src="/js/kamadatepicker.js"></script>
+<script src="/js/kamadatepicker.holidays.js"></script>
+<script src="/js/kamadatepicker.min.js"></script>
+
+  @*  <script src="/js/webpack.config.js"></script>*@
+
+
+<script>
+
+    kamaDatepicker('test-date-id', { buttonsColor: "red", forceFarsiDigits: true });
+</script>
+
+
+}

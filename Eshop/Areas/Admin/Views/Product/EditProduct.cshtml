@@ -1,0 +1,256 @@
+﻿@using Domain.Models.Product
+@using Application.Interface
+@model Domain.ViewModels.Product.EditProductViewModel
+
+@{
+    ViewData["Title"] = "EditProduct";
+    var features = ViewData["Features"] as List<Feature>;
+    var featuresValues = ViewData["FeaturevValues"] as List<FeatureValue>;
+    var subcategory = ViewData["SubCategories"] as SelectList;
+
+}
+
+
+<div style="margin-top: 120px" class="col-lg-12 col-sm-6 col-xs-12 ">
+    <div class="widget flat radius-bordered">
+        <div class="widget-header bg-danger">
+            <span class="widget-caption">افزودن کالا</span>
+        </div>
+        <div class="widget-body">
+            <div id="registration-form">
+                <form method="post" asp-controller="Product" asp-action="EditProduct" role="form">
+
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="CategoryId" />
+                    <div class="form-title">
+                        مشخصات کالا
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail2">عنوان کالا</label>
+                                <span class="input-icon icon-right">
+                                    <input type="text" asp-for="Title" class="form-control" id="exampleInputEmail2" placeholder="عنوان کالا">
+                                    <i class="fa fa-envelope blue"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="exampleInputName2">توضیح کوتاه</label>
+                                <span class="input-icon icon-right">
+                                    <input type="text" asp-for="ShortDescription" class="form-control" id="exampleInputName2" placeholder="توضیح کوتاه">
+                                    <i class="glyphicon glyphicon-user palegreen"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    @*    <div class="row">
+                        @foreach (var item in features)
+                        {
+                        <div class="col-sm-6">
+                        <label>
+                        @item.Title :
+                        </label>
+                        <div class="form-group">
+                        <span class="input-icon icon-right">
+                        <select name="feacherValues" id="featureValue1" style="width: 100%;" tabindex="-1" class="select2 align-content-lg-around" aria-hidden="true" onselect="@Model.FeatureValues">
+                        @foreach (var value in featuresValues.Where(v => v.FeatureId == item.Id))
+                        {
+                        <option value="@value.Id"> @value.Value</option>
+                        }
+                        </select>
+                        </span>
+                        </div>
+
+
+
+                        </div>
+
+                        }
+                        <div class="container">
+                        <div class="row form-control">
+                        <input type="hidden" asp-for="PlusPriceId" />
+                        <input type="number" asp-for="PlusPrice" asp-for="Price" placeholder="مبلغ اضافه شده به خاطر ویژگی" />
+                        </div>
+                        </div>
+                        </div>*@
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail2">توضیح کالا</label>
+                                <span class="input-icon icon-right">
+                                    <textarea class="form-control" asp-for="Description" rows="10"></textarea>
+                                    <i class="glyphicon glyphicon-briefcase darkorange"></i>
+                                </span>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select id="e1" asp-for="CategoryId" asp-items="@(ViewData["Categories"] as SelectList)" style="width: 100%;" tabindex="-1" class="select2 align-content-lg-around" aria-hidden="true">
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <div id="subdiv">
+                                @if (subcategory != null)
+                                {
+
+                                    @foreach (var item in subcategory)
+                                    {
+                                        <label>
+                                            <input type="checkbox" checked="checked" name="selctedcategor" class="colored-danger" value="@item.Value">
+                                            <span class="text">@item.Text</span>
+
+                                        </label>
+                                    }
+
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="partial">
+
+                        @*<partial id="featurePartial" name="ProductFeaturePartial"/>*@
+                    </div>
+                    <div class="form-group">
+                        <label for="definpu">قیمت</label>
+                        <input type="number" asp-for="Price" class="form-control" id="definput" placeholder="قیمت">
+                    </div>
+                    <button type="submit" class="btn btn-danger">ثبت</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Section
+{
+<script>
+
+
+    $("#e1").change(function () {
+        $("#subdiv").empty();
+        $.getJSON("/home/GetSubGroups/" + $("#e1 :selected").val(),
+            function (data) {
+
+                $.each(data,
+                    function () {
+                        $("#subdiv").append('<label >' + '<input type="checkbox" name="selctedcategor" class="colored-danger" value=' + this.value + '>' +
+                            '  <span class="text">' + this.text + '</span>' +
+                            '</label>');
+
+                    });
+
+            });
+
+
+    });
+</script>
+
+<script>
+
+      function getfeaturs()
+{
+       
+        var values = [];
+
+        $(".featureValue").each(function () {
+            values.push(parseInt($(this).val()));
+        });
+
+    $.ajax
+    (
+        {
+            url: "/Admin/AddFeatureJson",
+            type: "post",
+            traditional: true,
+            data:
+            {
+                featureValues: values,
+                plusPrice: $("#plusPrice").val(),
+                productId: @Model.Id,
+             },
+            beforeSend: function () {
+                //open_waiting();
+            },
+
+
+            success: function (res) {
+                reloadPartial();
+                $("#partial").html('');
+                $("#partial").html(res);
+                $("#modalFeature").modal('hide');
+                //close_waiting();
+                //$("#DateTimeModal").modal("show");
+            },
+            error: function () {
+                //close_waiting();
+                //ShowMessage("اعلان", "عملیات با خطا مواجه شد لطفا مجدد تلاش کنید .", "error");
+            }
+        }
+    );
+     $("#modalFeature").modal('hide');
+      reloadPartial();
+}
+
+
+
+    $(reloadPartial());
+    
+
+            function reloadPartial() {
+        $("#partial").load("/Admin/ReturnFeatureJson/" +@Model.Id);
+    }
+    
+    
+  
+
+
+</script>
+<script>
+
+    function Deletefeaturs(priceid)
+{
+
+
+  
+
+
+
+    $.ajax({
+        url: "/Admin/RemoveFeatureResult",
+        type: "post",
+        data: {
+            priceId: priceid,
+
+        },
+        beforeSend: function () {
+            //open_waiting();
+        },
+        success: function (res) {
+
+            $("#partial").html('');
+            $("#partial").html(res);
+            //close_waiting();
+            //$("#DateTimeModal").modal("show");
+        },
+        error: function () {
+            //close_waiting();
+            //ShowMessage("اعلان", "عملیات با خطا مواجه شد لطفا مجدد تلاش کنید .", "error");
+        }
+    });
+    reloadPartial();
+}
+</script>
+}
+

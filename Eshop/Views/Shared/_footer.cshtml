@@ -1,0 +1,121 @@
+﻿@using Domain.ViewModels.DynamicLinks
+@{
+    var footerlinks = ViewData["FooterLinks"] as LinksForSiteViewModel;
+}
+
+<footer class="page-footer">
+    <div class="container footer-logo-area">
+        <div class="d-flex align-items-start">
+            <div class="logo-container logo-box">
+                <a href="/" class="logo">
+                    <img src="/site/theme-assets/images/logo.svg" width="120" alt="">
+                    <span class="logo-text">بررسی،انتخاب و خرید آنلاین</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+     
+        <div class="services border-bottom py-4 mb-4">
+            <div class="service-container">
+                <a href="#" class="service">
+                    <span class="service-icon">
+                        <img src="/site/theme-assets/images/services/01.svg" alt="">
+                    </span>
+                    <span class="service-label">امکان تحویل اکسپرس</span>
+                </a>
+            </div>
+            <div class="service-container">
+                <a href="" class="service">
+                    <span class="service-icon">
+                        <img src="/site/theme-assets/images/services/02.svg" alt="">
+                    </span>
+                    <span class="service-label">امکان پرداخت در محل</span>
+                </a>
+            </div>
+            <div class="service-container">
+                <a href="" class="service">
+                    <span class="service-icon">
+                        <img src="/site/theme-assets/images/services/03.svg" alt="">
+                    </span>
+                    <span class="service-label">۷ روز هفته، ۲۴ ساعته</span>
+                </a>
+            </div>
+            <div class="service-container">
+                <a href="" class="service">
+                    <span class="service-icon">
+                        <img src="/site/theme-assets/images/services/04.svg" alt="">
+                    </span>
+                    <span class="service-label">۷ روز ضمانت بازگشت کالا</span>
+                </a>
+            </div>
+            <div class="service-container">
+                <a href="" class="service">
+                    <span class="service-icon">
+                        <img src="/site/theme-assets/images/services/05.svg" alt="">
+                    </span>
+                    <span class="service-label">ضمانت اصل بودن کالا</span>
+                </a>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="widget widget-footer">
+                    <div class="widget-title">لینک های  مفید</div>
+                    <div class="widget-content widget-list">
+                        <ul>
+
+                            <li><a href="/ContactUss">تماس با ما</a></li>
+                            @await Component.InvokeAsync("FooterLinks")
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="widget widget-footer">
+                    <div class="widget-title">خدمات مشتریان</div>
+                    <div class="widget-content widget-list">
+                        <ul>
+                            <li><a href="/faq">پاسخ به پرسشهای متداول</a></li>
+                            @await Component.InvokeAsync("DynamicPages")
+                        </ul>
+                    </div>
+                </div>
+            </div>
+         
+            <div class="col-lg-4 col-md-5">
+                @await Component.InvokeAsync("SocialMediaVC")
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <div class="expandable-text pt-1" style="height: 100px;">
+                    <div class="expandable-text_text fa-num">
+                        <div class="fs-6 fw-bold mb-2">
+                            فروشگاه اینترنتی یکتاکالا بررسی، انتخاب و خرید آنلاین
+                        </div>
+
+                    </div>
+                  
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="trust-symbol">
+                    <a href="">
+                        <img src="/site/theme-assets/images/symbol/01.png" alt="">
+                    </a>
+                    <a href="">
+                        <img src="/site/theme-assets/images/symbol/02.png" alt="">
+                    </a>
+                    <a href="">
+                        <img src="/site/theme-assets/images/symbol/03.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right text-center text-muted py-3">
+            این فروشگاه اینترنتی صرفا به منظور نمونه کار است و هیچگونه فعالیتی ندارد
+        </div>
+    </div>
+</footer>

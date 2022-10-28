@@ -1,0 +1,30 @@
+﻿@model Domain.ViewModels.Product.EditFeatureViewModel
+@{
+    ViewData["Title"] = "DeleteFeature";
+}
+
+<div style="margin-top: 110px" class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-left bordered-darkorange">
+                <span class="widget-caption">حذف ویژگی</span>
+            </div>
+            <div class="widget-body bordered-left bordered-warning">
+                <form method="post" asp-controller="Feature" asp-action="DeleteFeature" class="form-inline" role="form">
+            <input type="hidden" asp-for="Id"/>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">عنوان:</label>
+                        <input type="text" asp-for="Title" readonly="readonly" class="form-control" id="exampleInputEmail2" >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">مقدار:</label>
+                        <input type="text" asp-for="Value" readonly="readonly" class="form-control" id="exampleInputPassword2" >
+                    </div>
+                    
+                    <button type="submit" class="btn btn-danger shiny">حذف</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

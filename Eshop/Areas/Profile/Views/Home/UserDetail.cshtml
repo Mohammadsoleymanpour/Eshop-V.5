@@ -1,0 +1,212 @@
+﻿@using Application.Convertor
+@using Domain.Models.Enums
+@model Domain.ViewModels.User.UserForProfileDetailViewModel
+@{
+    ViewData["Title"] ="مشاهده اطلاعات";
+}
+<main class="page-content">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-xl-3 col-lg-4 col-md-5 mb-md-0 mb-4">
+                <div class="ui-sticky ui-sticky-top">
+                    <div class="profile-user-info py-3 ui-box bg-white">
+                        <div class="profile-detail">
+                            <div class="d-flex align-items-center">
+                                <div class="profile-avatar me-3">
+                                    <img src="./theme-assets/images/avatar/default.png" alt="avatar">
+                                </div>
+                                <div class="profile-info">
+                                    <a href="#" class="text-decoration-none text-dark fw-bold mb-2">@User.Identity.Name</a>
+                                    <div class="text-muted fs-7 fw-bold">۰۹xxxxxxxxx</div>
+                                </div>
+                            </div>
+                            <div class="user-options">
+                                <ul>
+                                    <li>
+                                        <span class="label">کیف پول</span>
+                                        <span class="detail">
+                                            <span class="d-block">
+                                                ۰
+                                                <span class="currency fs-7 fw-bold">تومان</span>
+                                            </span>
+                                            <a href="#"
+                                               class="link border-bottom-0 text-info fs-7 fw-bold">
+                                                افزایش
+                                                موجودی <i class="ri-arrow-left-s-line"></i>
+                                            </a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="label">باشگاه مشتریان</span>
+                                        <span class="detail">
+                                            <span class="d-block">
+                                                ۰
+                                                <span class="score text-muted fs-7">امتیاز</span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <ul class="nav nav-items-with-icon flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="nav-link-icon ri-file-list-3-line"></i>
+                                    سفارش
+                                    های من
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="nav-link-icon ri-heart-3-line"></i> لیست
+                                    ها
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="nav-link-icon ri-chat-1-line"></i>
+                                    نظرات
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="nav-link-icon ri-map-pin-line"></i> نشانی
+                                    ها
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="nav-link-icon ri-gift-line"></i> کارت های
+                                    هدیه
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="nav-link-icon ri-notification-line"></i>
+                                    پیغام ها
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="nav-link-icon ri-time-line"></i> بازدید
+                                    های
+                                    اخیر
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="nav-link-icon ri-user-line"></i> اطلاعات
+                                    حساب
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="nav-link-icon ri-logout-box-r-line"></i>
+                                    خروج
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-8 col-md-7">
+
+                <div class="ui-box bg-white mb-5">
+                    <div class="ui-box-title">اطلاعات شخصی</div>
+                    <form method="post" asp-controller="Home" asp-action="UserDetail">
+                        <div class="ui-box-content">
+                            <div class="row">
+                                @if (ViewBag.NotFound != null)
+                                {
+
+                                
+                                    <div class="alert alert-warning alert-dismissible fade show mb-5" role="alert">
+                                        <div>
+                                            سفارش شما در انتظار پرداخت است. برای جلوگیری از لغو سفارش، لطفا پرداخت را انجام دهید.
+                                            <a href="#" class="btn btn-sm btn-primary mx-3">سفارش های من</a>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                }
+                                <div class="col-lg-6 mb-3">
+                                    <div class="form-element-row mb-3">
+                                        <label class="label fs-7">نام</label>
+                                        <input type="text" asp-for="FirstName" class="form-control" placeholder="نام">
+                                        <span style="color: red" asp-validation-for="FirstName"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-element-row mb-3">
+                                            <label class="label fs-7"> نام خانوادگی</label>
+                                            <input type="text" asp-for="LastName" class="form-control" placeholder="نام خانوادگی ">
+                                            <span style="color: red" asp-validation-for="LastName"></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="border-bottom py-2">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="fs-7 fw-bold text-dark">پست الکترونیک</div>
+                                        </div>
+                                        <div class="fs-6 fw-bold text-muted">@User.Identity.Name </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-element-row mb-3">
+                                            <label class="label fs-7">شماره تماس</label>
+                                            <input type="text" asp-for="PhoneNumber" class="form-control" placeholder="شماره تماس">
+                                            <span style="color: red" asp-validation-for="PhoneNumber"></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 mb-3">
+                                    <div class="form-element-row mb-5">
+                                        <input type="text" id="test-date-id" asp-for="BirthDay" class="form-control " style="border-radius: 5px" placeholder="تاریخ تولد">
+                                        <span style="color: red" asp-validation-for="BirthDay"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="row">
+                                        <div class="form-element-row mb-5">
+                                            <select class="select2" asp-for="Gender" asp-items="Html.GetEnumSelectList(typeof(Gender))"></select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="remodal-footer">
+                                    <button type="submit" asp-controller="Home" asp-action="UserDetail" class="btn btn-sm btn-primary px-3">ثبت اطلاعات</button>
+                                </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+@section Section
+    {
+    <script src="//code.jquery.com/jquery.min.js"></script>
+
+    <script src="/js/kamadatepicker.js"></script>
+    <script src="/js/kamadatepicker.holidays.js"></script>
+    <script src="/js/kamadatepicker.min.js"></script>
+
+    @*  <script src="/js/webpack.config.js"></script>*@
+
+
+    <script>
+
+        kamaDatepicker('test-date-id', { buttonsColor: "red", forceFarsiDigits: true });
+    </script>
+
+
+}

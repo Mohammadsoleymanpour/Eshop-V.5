@@ -1,0 +1,70 @@
+﻿@using Domain.Models.Enums
+@model Domain.ViewModels.Ticket.AddTicketFromUserViewModel
+@{
+    ViewData["Title"] = "NewTicket";
+}
+
+<div class="ui-box bg-white mb-5">
+    <div class="ui-box-title">ایجاد تیکت جدید</div>
+    <div class="ui-box-subtitle">
+        فرم زیر را پر کنید (توضیحات کامل تر روند پاسخ دهی را کوتاه تر
+        می
+        کند.)
+    </div>
+    <div class="ui-box-content">
+        <!-- start of add-ticket-form -->
+        <form method="post" asp-controller="Ticket" asp-action="NewTicket" class="add-ticket-form">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- start of form-element -->
+                    <div class="form-element-row mb-5">
+                        <label class="label">موضوع</label>
+                        <input type="text" asp-for="Subject" class="form-control" placeholder="">
+                        <span asp-validation-for="Subject"></span>
+
+                    </div>
+                    <!-- end of form-element -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- start of form-element -->
+                    <div class="form-element-row mb-5">
+                        <label class="label">بخش</label>
+                        <select class="select2" asp-for="TicketParts" asp-items="Html.GetEnumSelectList(typeof(TicketParts))" tabindex="-1" aria-hidden="true"></select>
+                        <span asp-validation-for="TicketParts"></span>
+
+                    </div>
+                    <!-- end of form-element -->
+                </div>
+                <div class="col-md-6">
+                    <!-- start of form-element -->
+                    <div class="form-element-row mb-5">
+                        <label class="label">اولویت</label>
+                        <select class="select2" asp-for="TicketLevels" asp-items="Html.GetEnumSelectList(typeof(TicketLevels))"  tabindex="-1" aria-hidden="true"></select>
+                        <span asp-validation-for="TicketLevels"></span>
+
+                    </div>
+                    <!-- end of form-element -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <!-- start of form-element -->
+                    <div class="form-element-row mb-5">
+                        <label class="label">پیام</label>
+                        <textarea rows="5" asp-for="Message" class="form-control" placeholder="متن پیام"></textarea>
+                        <span asp-validation-for="Message"></span>
+
+                    </div>
+                    <!-- end of form-element -->
+                </div>
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-primary px-4">ثبت و ارسال <i class="ri-ball-pen-line ms-2"></i></button>
+                </div>
+            </div>
+        </form>
+        <!-- end of add-ticket-form -->
+    </div>
+</div>
+

@@ -1,0 +1,123 @@
+﻿@using Domain.ViewModels.Ticket
+@using Domain.Models.Enums
+@using Microsoft.OpenApi.Extensions
+@using Application.Security
+@model Domain.ViewModels.Ticket.FilterTicketListViewModel
+@{
+    ViewData["Title"] = "GetAllTickets";
+}
+
+<div class="ui-box bg-white mb-5">
+    <div class="ui-box-title align-items-center justify-content-between">
+        تیکتهای شما
+        <a href="/Profile/NewTicket" class="btn btn-outline-light">تیکت جدید <i class="ri-add-line ms-2"></i></a>
+    </div>
+    @if (Model.Entities == null || !Model.Entities.Any())
+    {
+        <div class="ui-box-empty-content">
+            <div class="ui-box-empty-content-icon">
+                <img src="./site/theme-assets/images/theme/orders.svg" alt="">
+            </div>
+            <div class="ui-box-empty-content-message">
+                تیکتی تا به الان ایجاد نکرده اید.
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="ui-box-content">
+            <form id="indexForm">
+            <input type="hidden" asp-for="Page" id="page" />
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>شماره درخواست</th>
+                        <th>زمان ایجاد</th>
+                        <th>بخش</th>
+                        <th>موضوع</th>
+                        <th>وضعیت</th>
+                        <th>آخرین بروزرسانی</th>
+                        <th>عملیات</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var ticket in Model.Entities)
+                    {
+                        <tr>
+                            <td class="fa-num">@ticket.Id</td>
+                            <td class="fa-num">@ticket.CreatDate</td>
+                            <td class="fa-num">@ticket.Part.GetEnumDisPlayName()</td>
+                            <td class="fa-num">@ticket.Title </td>
+
+                            @switch (ticket.Status)
+                            {
+                                case TicketStatusEnum.Answered:
+                                {
+                                    <td class="fa-num">
+                                        <span class="badge bg-success rounded-pill">
+                                            پاسخ داده
+                                            شد
+                                        </span>
+                                    </td>
+                                    break;
+
+                                }
+                                case TicketStatusEnum.Pending:
+                                {
+                                    <td class="fa-num">
+                                        <span class="badge bg-warning rounded-pill">
+                                            در حال
+                                            بررسی
+                                        </span>
+                                    </td>
+                                    break;
+
+                                }
+                                case TicketStatusEnum.Closed:
+                                {
+                                    <td class="fa-num">
+                                        <span class="badge bg-danger rounded-pill">بسته</span>
+                                    </td>
+                                    break;
+
+                                }
+
+
+                            }
+
+
+                            <td class="fa-num">@Model.LastUpdated</td>
+                            <td>
+                                <a href="/Profile/DetailTicket/@ticket.Id" class="btn btn-circle btn-info my-1"><i class="ri-eye-line"></i></a>
+                               @* <a href="#" class="btn btn-circle btn-danger my-1"><i class="ri-close-line"></i></a>*@
+                            </td>
+
+                        </tr>
+                        
+                    }
+
+                    </tbody>
+                </table>
+            </div>
+          </form>
+            <div class="row DTTTFooter">
+                <div class="col-sm-6">
+                    <div class="dataTables_info" id="simpledatatable_info" role="status" aria-live="polite">Showing 1 to 5 of 25 entries</div>
+                </div>
+                <partial name="_Paging" model="@Model.GetCurrentPaging()"/>
+            </div>
+        </div>
+    }
+</div>
+
+@section Section
+{
+    <script>
+    function OnClick(pageId) {
+    $("#page").val(pageId)
+    $("#indexForm").submit();
+
+    }
+</script>
+}

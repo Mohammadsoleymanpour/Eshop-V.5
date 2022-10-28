@@ -1,0 +1,175 @@
+﻿@model Domain.ViewModels.Order.OrderDetailForAdminViewModel
+@{
+    ViewData["Title"] = "OrderDetail";
+}
+
+@*<div class="col-xs-12 col-md-12">
+    <div class="widget">
+        <div class="widget-header ">
+            <span class="widget-caption">نمایش محصولات سفارش</span>
+            <div class="widget-buttons">
+                <a href="#" data-toggle="maximize">
+                    <i class="fa fa-expand"></i>
+                </a>
+                <a href="#" data-toggle="collapse">
+                    <i class="fa fa-minus"></i>
+                </a>
+                <a href="#" data-toggle="dispose">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div id="expandabledatatable_wrapper" class="dataTables_wrapper form-inline no-footer">
+                <div class="DTTT btn-group"><a class="btn btn-default DTTT_button_print" id="ToolTables_expandabledatatable_1" title="View print view" tabindex="0" aria-controls="expandabledatatable"><span>چاپ</span></a></div><div id="expandabledatatable_filter" class="dataTables_filter"><label><input type="search" class="form-control input-sm" placeholder="" aria-controls="expandabledatatable"></label></div><div class="dataTables_length" id="expandabledatatable_length"><label><select name="expandabledatatable_length" aria-controls="expandabledatatable" class="form-control input-sm"><option value="5">5</option><option value="15">15</option><option value="20">20</option><option value="-1">All</option></select></label></div><table class="table table-striped table-bordered table-hover dataTable no-footer" id="expandabledatatable" role="grid" aria-describedby="expandabledatatable_info" style="width: 1061px;">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 45px;"></th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="expandabledatatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
+                                                    نام محصول
+                                                : activate to sort column descending" style="width: 142px;">
+                                نام محصول
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="expandabledatatable" rowspan="1" colspan="1" aria-label="
+                                                    قیمت محصول
+                                                : activate to sort column ascending" style="width: 136px;">
+                                قیمت محصول
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="expandabledatatable" rowspan="1" colspan="1" aria-label="
+                                                    تعداد
+                                                : activate to sort column ascending" style="width: 76px;">
+                                تعداد
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="expandabledatatable" rowspan="1" colspan="1" aria-label="
+                                                    قیمت کل
+                                                : activate to sort column ascending" style="width: 76px;">
+                                قیمت کل
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+
+
+                        @foreach (var orderDetail in Model.OrderDetails)
+                        {
+                            <tr role="row" class="odd">
+                                <td><i class="fa row-details fa-plus-square-o"></i></td>
+                                <td class="sorting_1">
+                                    @orderDetail.Product.Title
+                                </td>
+                                <td>
+                                    @orderDetail.Price
+                                </td>
+                                <td>
+                                    @orderDetail.Count
+                                </td>
+                                <td>
+                                    @(orderDetail.Count*orderDetail.Price)
+                                </td>
+
+                            </tr>
+                        }
+
+
+                     
+                      
+                    </tbody>
+                </table><div class="row DTTTFooter"><div class="col-sm-6"><div class="dataTables_info" id="expandabledatatable_info" role="status" aria-live="polite">Showing 1 to 5 of 6 entries</div></div><div class="col-sm-6"><div class="dataTables_paginate paging_bootstrap" id="expandabledatatable_paginate"><ul class="pagination"><li class="prev disabled"><a href="#">Prev</a></li><li class="active"><a href="#">1</a></li><li><a href="#">2</a></li><li class="next"><a href="#">Next</a></li></ul></div></div></div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+
+
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header ">
+                <span class="widget-caption">Expandable DataTable</span>
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    <a href="#" data-toggle="dispose">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body">
+                <table class="table table-striped table-bordered table-hover" id="expandabledatatable">
+                    <thead>
+                        <tr>
+                            <th>
+                                نام محصول
+                            </th>
+                            <th>
+                                قیمت
+                            </th>
+                            <th>
+                                تعداد
+                            </th>
+                            <th>
+                                توضیح کوتاه
+                            </th>
+                            <th>
+                                وضعیت
+                            </th>
+                            <th>عکس محصول</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                       @foreach (var orderDetail in Model.OrderDetails)
+                       {
+                           <tr>
+                               <td>
+                                   @orderDetail.Product.Title
+                               </td>
+                               <td>
+                                   @orderDetail.Price
+                               </td>
+                               <td>
+                                   @orderDetail.Count
+                               </td>
+                               <td>
+                                   @orderDetail.Product.ShortDescription
+                               </td>
+                               <td>
+                                   @orderDetail.Order.IsFinally
+                               </td>
+                               <td>
+                                   @orderDetail.Product.ProductGalleries.FirstOrDefault().ImageName
+                               </td>
+                           </tr>
+                      
+                       }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Section
+{
+    <script src="/Admin/assets/js/datatable/jquery.dataTables.min.js"></script>
+    <script src="/Admin/assets/js/datatable/ZeroClipboard.js"></script>
+    <script src="/Admin/assets/js/datatable/dataTables.tableTools.min.js"></script>
+    <script src="/Admin/assets/js/datatable/dataTables.bootstrap.min.js"></script>
+    <script src="/Admin/assets/js/datatable/datatables-init.js"></script>
+    <script>
+    
+        InitiateExpandableDataTable.init();
+      
+    </script>
+
+}

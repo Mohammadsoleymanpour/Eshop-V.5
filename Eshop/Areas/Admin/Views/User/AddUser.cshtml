@@ -1,0 +1,130 @@
+﻿@using Domain.Models.Enums
+@model Domain.ViewModels.User.UserFroAdmin
+@{
+    ViewData["Title"] = "AddUser";
+}
+
+<div style="margin-top: 100px" class="container">
+    <form method="post" asp-controller="User" asp-action="AddUser">
+
+    
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget flat radius-bordered">
+            <div class="widget-header bg-blue">
+                <span class="widget-caption">افزودن کاربر</span>
+            </div>
+            <div class="widget-body">
+                <div id="registration-form">
+
+                    <div class="form-title">
+                        مشخصات
+                    </div>
+
+                    <div class="form-group">
+                        <span class="input-icon icon-right">
+                            <input type="email" asp-for="Email" class="form-control" placeholder="ایمیل">
+                            <i class="fa fa-envelope-o circular"></i>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="input-icon icon-right">
+                            <input type="password" asp-for="Password" class="form-control" placeholder="کلمه عبور">
+                            <i class="fa fa-lock circular"></i>
+                        </span>
+                    </div>
+
+
+                    <div class="form-title">
+                        Personal Information
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <span class="input-icon icon-right">
+                                <input type="text" asp-for="FirstName" class="form-control" placeholder="نام">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <span class="input-icon icon-right">
+                                <input type="text" asp-for="LastName" class="form-control" placeholder="نام خانوادگی">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <span class="input-icon icon-right">
+                                <input type="text" asp-for="PhoneNumber" class="form-control" placeholder="شماره موبایل">
+                                <i class="glyphicon glyphicon-phone"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <span class="input-icon icon-right">
+                                <input type="text" id="test-date-id" asp-for="BirthDay" class="form-control " style="border-radius: 5px" placeholder="تاریخ تولد">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="radio">
+                                <label>
+                                    <input name="form-field-radio" value="@Gender.male" asp-for="Gender" type="radio" class="colored-blue">
+                                    <span class="text"> مرد</span>
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input name="form-field-radio" value="@Gender.female" asp-for="Gender"  type="radio" class="colored-blue">
+                                    <span class="text">زن</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="wide">
+                <div class="row">
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" asp-for="IsAdmin" class="colored-blue">
+                            <span class="text">ادمین</span>
+                        </label>
+                    </div>
+                </div>
+                <span asp-validation-all=""></span>
+                <button type="submit" class="btn btn-blue">Register</button>
+                </>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+@section Section
+{
+<script src="//code.jquery.com/jquery.min.js"></script>
+
+<script src="/js/kamadatepicker.js"></script>
+<script src="/js/kamadatepicker.holidays.js"></script>
+<script src="/js/kamadatepicker.min.js"></script>
+
+    @*  <script src="/js/webpack.config.js"></script>*@
+
+
+<script>
+
+    kamaDatepicker('test-date-id', { buttonsColor: "red", forceFarsiDigits: true });
+</script>
+
+
+}

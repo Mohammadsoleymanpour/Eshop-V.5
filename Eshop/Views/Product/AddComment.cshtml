@@ -1,0 +1,92 @@
+﻿@using Domain.ViewModels.Product
+@model Domain.ViewModels.Product.AddCommentViewModel
+@{
+    ViewData["Title"] = "AddComment";
+    var imageName = ViewBag.DefaultImage as string;
+    var product = ViewData["product"] as ProductViewModel;
+}
+
+<div class="ui-box bg-white product-detail-container mb-5">
+
+    <div class="ui-box-content">
+        <div class="row mb-3">
+            <div class="col-lg-4 mb-lg-0 mb-4">
+                <!-- start of product-gallery -->
+                <div class="product-gallery">
+
+                    <div class="gallery-img-container">
+                        <div class="gallery-img">
+                            <img src="/images/img/@imageName" alt="">
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- end of product-gallery -->
+            </div>
+
+            <div class="col-lg-8 mb-4">
+                <!-- start of product-detail -->
+                <h2 class="product-title">
+                  @product.Title
+                </h2>
+                <form method="post" asp-controller="Product" asp-action="AddComment" class="add-comment-product">
+                    <!-- start of form-element -->
+                    <input type="hidden" asp-for="ProductId" />
+                    <input type="hidden" asp-for="ParentId" />
+                    <!-- end of form-element -->
+                    <!-- start of form-element -->
+                    <!-- end of form-element -->
+                    <!-- start of form-element -->
+                    <!-- end of form-element -->
+                    <!-- start of form-element -->
+                    <div class="form-element-row mb-3">
+                        <label class="label">متن نظر شما (اجباری)</label>
+                        <textarea rows="5" asp-for="Comment" class="form-control" placeholder="متن نظر خود را بنویسید.."></textarea>
+                    </div>
+                    <!-- end of form-element -->
+                    <div class="text-end mb-3">
+                        <button class="btn btn-primary">ثبت نظر <i class="ri-send-plane-fill ms-2"></i></button>
+                    </div>
+                </form>
+                <!-- start of comments-product-attributes -->
+                <!-- end of comments-product-attributes -->
+                <!-- end of product-detail -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+   
+    <div class="col-md-7">
+        <div class="fs-5 fw-bold text-dark mb-3">
+            دیگران را با نوشتن نظرات خود، برای انتخاب این محصول راهنمایی کنید.
+        </div>
+        <div class="fs-7 fw-bold text-info mb-3">
+            لطفا پیش از ارسال نظر، خلاصه قوانین زیر را مطالعه کنید:
+        </div>
+        <ul class="ps-4 text-secondary">
+            <li class="mb-3">
+                لازم است محتوای ارسالی منطبق برعرف و شئونات جامعه و با بیانی رسمی و
+                عاری از لحن
+                تند، تمسخرو توهین باشد.
+            </li>
+            <li class="mb-3">
+                از ارسال لینک‌های سایت‌های دیگر و ارایه‌ی اطلاعات شخصی خودتان مثل
+                شماره تماس،
+                ایمیل و آی‌دی شبکه‌های اجتماعی پرهیز کنید.
+            </li>
+            <li class="mb-3">
+                در نظر داشته باشید هدف نهایی از ارائه‌ی نظر درباره‌ی کالا ارائه‌ی
+                اطلاعات مشخص و
+                دقیق برای راهنمایی سایر کاربران در فرآیند خرید یک محصول توسط ایشان است.
+            </li>
+            <li class="mb-3">
+                با توجه به ساختار بخش نظرات، از پرسیدن سوال یا درخواست راهنمایی در
+                این بخش
+                خودداری کرده و سوالات خود را در بخش «پرسش و پاسخ» مطرح کنید.
+            </li>
+        </ul>
+    </div>
+</div>
+

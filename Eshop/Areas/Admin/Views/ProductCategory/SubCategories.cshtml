@@ -1,0 +1,101 @@
+﻿@model Domain.ViewModels.ProductCategory.FilterCategoryProduct
+
+@{
+    ViewData["Title"] = "زیرو گروه ها";
+    var id = ViewBag.Id;
+}
+
+@*@if ( ViewBag.NoSubCat)
+{
+    <div class="container">
+        <div class="row">
+            <p class="text text-danger">زیر گروهی یافت نشد</p>
+        </div>
+    </div>
+}*@
+
+
+<div>
+    <form id="indexForm">
+        <input asp-for="Page" type="hidden" id="page" />
+        <div class="widget">
+            <div class="col-md-12 col-xs-12">
+                <div class="widget-header bordered-bottom bordered-blue">
+                    <span class="widget-caption">Basic Form</span>
+                </div>
+                <div class="widget-body">
+                    <div>
+
+                        <div id="searchable_filter" class="dataTables_filter">
+                            <label>
+                                <input type="search" asp-for="CategoryName" class="form-control input-sm" placeholder="جست و جو" aria-controls="searchable">
+                            </label>
+                            <input type="submit" class="btn btn-darkorange btn-sm shiny btn-label fa fa-search" value="جست و جو">
+                            <input type="submit" class="btn btn-darkorange btn-sm shiny btn-label fa fa-search" value="حذف فیلتر">
+                            <a href="/Admin/AddCategory/@id" class="btn btn-azure shiny btn-label fa ">اضافه کردن دسته بندی جدید</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="well with-header  with-footer">
+
+            <table class="table table-hover">
+                <thead class="bordered-darkorange">
+                    <tr>
+                        <th>
+                            نام زیر گروه
+                        </th>
+
+                        <th>
+                            دستورات
+                        </th>
+                        <th>
+                            <a  href="/Admin/AddCategory/@id" class="btn btn-azure shiny">اضافه کردن زیر گروه جدید</a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Entities)
+                    {
+                        <tr>
+                            <td>
+                                <h4>
+                                    @item.Title
+                                </h4>
+                            </td>
+
+
+
+                            <td>
+                                <a class="btn btn-danger" href="/Admin/DeleteCategory/@item.Id/@item.ParnetId">حذف</a>
+                                <a class="btn btn-primary" href="/Admin/EditCategory/@item.Id/@item.ParnetId">ویرایش زیر گروه</a>
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <partial name="_Paging" model="@Model.GetCurrentPaging()" />
+
+           
+        </div>
+    </form>
+</div>
+
+@section Section
+    {
+    <script>
+        function OnClick(pageId) {
+            $("#page").val(pageId)
+            $("#indexForm").submit();
+
+        }
+    </script>
+}
+
+
+
+

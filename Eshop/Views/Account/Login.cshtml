@@ -1,0 +1,92 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Domain.ViewModels.User.LoginViewModel
+
+@{
+    ViewData["Title"] = "ورود به سایت";
+}
+<div class="page-wrapper">
+   
+    @if(ViewBag.IsSuccess!= null && ViewBag.IsSuccess==true){
+        <partial name="_SuccessSweetAlert"/>
+    }
+    <main class="page-content page-auth">
+        <!-- start of auth-container -->
+        <div class="auth-container">
+            <form method="post" asp-controller="Account" asp-action="Login">
+                <div class="auth-title mb-3"><a href="/Login">ورود</a> / <a href="/Register">ثبت نام</a></div>
+                <!-- start of auth-box -->
+                <div class="auth-box ui-box">
+                    <!-- start of auth-form -->
+                    <form action="#" class="auth-form">
+                        <!-- start of form-element -->
+                        <div class="form-element-row mb-5">
+                            <input type="email" asp-for="Email" class="form-control" placeholder=" ایمیل">
+                            <span style="color: red" asp-validation-for="Email"></span>
+                        </div>
+
+                        <div class="form-element-row mb-5">
+                            <input type="password" asp-for="Password" class="form-control" placeholder="رمز عبور ">
+                            <span style="color: red" asp-validation-for="Password"></span>
+
+                        </div>
+                        <div class="form-element-row mb-5">
+                            <div class="checkbox">
+                                <label>
+                                    <span class="text">مرا به خاطر بسپار</span>
+                                    <input type="checkbox" class="colored-blue">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-element-row mb-5">
+                            <div class="checkbox">
+                                <label>
+                                    <a href="/ForgotPassword">رمز عبور خود را فراموش کردم</a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-element-row mb-3">
+
+                            <input type="submit" class="btn btn-primary" value="ورود" />
+                        </div>
+                        <!-- end of form-element -->
+                        <!-- start of form-element -->
+                        <div class="form-element-row">
+                            <div>
+                                با ورود و یا ثبت نام در سایت شما
+                                <a href="#" class="link">
+                                    شرایط و
+                                    قوانین
+                                </a> استفاده
+                                از تمام سرویس های
+                                سایت و <a href="#" class="link">قوانین حریم خصوصی</a> آن را می‌پذیرید.
+                            </div>
+                        </div>
+                        <!-- end of form-element -->
+                    </form>
+                    <!-- end of auth-form -->
+                </div>
+                <!-- end of auth-box -->
+            </form>
+        </div>
+        <!-- start of auth-container -->
+    </main>
+    <footer class="page-mini-footer">
+       
+        <div class="copy-right bg-light py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mb-md-0 mb-4">
+                        <div class="text-muted text-md-start text-center">
+                            کليه حقوق اين سايت متعلق به echo_designer
+                            می‌باشد.
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-muted text-md-end text-center">echo_designer - 2021 © Copyright</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

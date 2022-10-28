@@ -1,0 +1,155 @@
+﻿@using Eshop.Common
+@model List<Domain.ViewModels.User.GetUserForAdminViewMdoel>
+
+@{
+    ViewData["Title"] = "GetUsers";
+}
+
+<div style="margin-top: 100px" class="col-xs-6 col-md-12 position-relative">
+
+    <div class="row">
+        <form>
+            <div id="dataTables-example_filter" class="dataTables_filter">
+                <div class=" col-sm-5">
+                    <div class="form-group" style="margin-top: 10px">
+                        <span class="input-icon inverted">
+                            <input type="search" name="filteremail" class="form-control input-sm" placeholder="جست و جو بر اساس ایمیل">
+                            <i class="glyphicon glyphicon-search bg-blue"></i>
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class=" col-sm-5">
+                    <div class="form-group" style="margin-top: 10px">
+                        <span class="input-icon inverted">
+                            <input type="text" name="filterphoneNumber" class="form-control input-sm" placeholder="جست و جو بر اساس شماره موبایل">
+                            <i class="glyphicon glyphicon-search bg-blue"></i>
+                        </span>
+
+                    </div>
+
+                </div>
+                <div style="margin: 10px;">
+                    <button type="submit" class="btn btn-blue">جست و جو</button>
+                    <a href="/getusers" class="btn btn-blue">حذف فیلتر</a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <div style="margin: 10px;">
+        <a href="/AddUser" class="btn btn-primary shiny btn btn-lg btn-outline">افزودن کاربر</a>
+    </div>
+    <div class="well with-header  with-footer">
+        <div class="header bg-blue">
+            لیست کاربران سایت
+        </div>
+        <table class="table table-hover">
+            <thead class="bordered-darkorange">
+                <tr>
+                    <th>
+                        ایمیل
+                    </th>
+                    <th>
+                        شماره موبایل
+                    </th>
+                    <th>
+                        جنسیت
+                    </th>
+                    <th>
+                        وضعیت
+                    </th>
+
+                    <th>
+                        دستورات
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            <h3>
+                            @item.Email
+                            </h3>
+                        </td>
+                        <td>
+                            <h3>
+                            @item.PhoneNumber
+                            </h3>
+                        </td>
+                        <td>
+                            @if (item.Gender == Domain.Models.Enums.Gender.male)
+                            {
+                                <h3>مرد</h3>
+                            }
+                            else
+                            {
+                                <h3>زن</h3>
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsActive == Domain.Models.Enums.Status.Active)
+                            {
+                                <div class="">
+                                    <p class="success">
+                                    <i class="glyphicon glyphicon-ok-circle fa-2x "></i>
+                                    </p>
+                                </div>
+                            }
+                           
+                            else if (item.IsActive == Domain.Models.Enums.Status.NotActive)
+                            {
+                                <div class="">
+                                    <p class="danger">
+                                        <i class="glyphicon glyphicon-remove-circle fa-2x "></i>
+                                    </p>
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            <Authrize permission-id="Permissions.DeleteUser">
+                                <a class="btn btn-danger shiny" href="/Admin/DeleteUser/@item.Id">حذف</a>
+                            </Authrize>
+                            <Authrize permission-id="Permissions.EditUser">
+
+                            <a class="btn btn-darkorange shiny" href="/Admin/EditUser/@item.Id">ویراش</a>
+                            </Authrize>
+                            <Authrize permission-id="Permissions.EditUser">
+
+                            <a class="btn btn-azure shiny " href="/Admin/DetailUser/@item.Id">جزییات</a>
+                            </Authrize>
+                            <Authrize permission-id="Permissions.UserFavorites">
+
+                            <a class="btn btn-maroon shiny" href="/Admin/FavoriteProduct/@item.Id">محصولات مورد علاقه</a>
+                            </Authrize>
+                            <Authrize permission-id="Permissions.UserOrders">
+
+                            <a class="btn btn-primary shiny" href="/Admin/Orders/@item.Id">سفارشات</a>
+                            </Authrize>
+                            <Authrize permission-id="Permissions.UserRoles">
+
+                            <a class="btn btn-primary shiny" href="/Admin/UserRoles/@item.Id">نقش های کاربر</a>
+                            </Authrize>
+
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <code>class="table table-hover"</code>
+        </div>
+    </div>
+
+
+
+
+</div>

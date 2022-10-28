@@ -1,0 +1,38 @@
+﻿@using Domain.Models.Enums
+@model List<Domain.Models.Common.SocialMedia>
+
+<div  class="widget widget-footer mb-4">
+    <div class="widget-title">با ما همراه باشید</div>
+    <div class="widget-content widget-socials">
+        <ul>
+            @foreach (var item in Model)
+            {
+
+                @switch (item.PlatForm)
+                {
+                    case SocialMediaPlatform.FaceBook:
+                        {
+                            <li><a href="@item.Url"><i class="ri-facebook-circle-fill"></i></a></li>
+                            break;
+                        }
+                    case SocialMediaPlatform.Twitter:
+                        {
+                            <li><a target="_blank" href="@item.Url"><i class="ri-twitter-fill"></i></a></li>
+                            break;
+                        }
+                    case SocialMediaPlatform.Instagram:
+                        {
+                            <li><a href="@item.Url"><i class="ri-instagram-fill"></i></a></li>
+                            break;
+                        }
+                    case SocialMediaPlatform.Telegram:
+                        {
+                            <li><a href="@item.Url"><i class="ri-telegram-fill"></i></a></li>
+                            break;
+                        }
+                }
+            }
+
+        </ul>
+    </div>
+</div>

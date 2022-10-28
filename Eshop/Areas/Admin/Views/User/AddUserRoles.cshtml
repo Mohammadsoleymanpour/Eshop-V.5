@@ -1,0 +1,39 @@
+﻿@using Domain.Models.Role
+@model List<Role>
+
+@{
+    var permissions = ViewData["Permission"] as List<Permission>;
+    int id=ViewBag.userId;
+}
+<div style="margin-top: 110px; margin-right: 50px" class="row">
+    <form method="post" asp-controller="User" asp-action="AddUserRoles">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-primary">
+                    <div class="panel-heading ">
+                        نقش کاربر
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>نقش کاربر را انتخاب کنید</label>
+                            <input type="hidden" name="userId" value="@id"/>
+                            @foreach (var item in Model)
+                            {
+                                <div class="checkbox dd-handle">
+                                    <label>
+                                        <input type="checkbox" name="selectedPermission" class="inverted" value="@item.Id" >
+                                        <span class="text">@item.RoleTitle</span>
+                                    </label>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+                <button type="submit" class="btn btn-palegreen btn-lg shiny">ثبت</button>
+            </div>
+        </div>
+        
+    </form>
+</div>

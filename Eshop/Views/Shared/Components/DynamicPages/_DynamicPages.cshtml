@@ -1,0 +1,12 @@
+﻿@using Domain.Models.Common
+@model List<DynamicPage>
+
+    @if(Model!=null)
+    {
+        foreach(var item in Model)
+        {
+             <li><a href="/Page/@item.Title">@item.Title</a></li>
+        }
+    }
+
+    

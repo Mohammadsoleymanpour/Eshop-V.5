@@ -1,0 +1,45 @@
+﻿
+@model Domain.ViewModels.Product.ProductCartViewModel
+<div class="swiper-slide" role="group" aria-label="3 / 9" style="width: 210.5px; margin-left: 10px;">
+    <div class="product-card">
+        <div class="product-thumbnail">
+            <a href="/Product/@Model.ProductId">
+                <img src="/images/thumb/@Model.ImageName" alt="product title">
+            </a>
+        </div>
+        <div class="product-card-body">
+            <h2 class="product-title">
+                <a href="/Product/@Model.ProductId">
+                    @Model.ProductName
+                </a>
+            </h2>
+            <div class="product-variant">
+                <span class="color" style="background-color: #4d5b63;"></span>
+                <span class="color" style="background-color: #57415f;"></span>
+                <span class="color" style="background-color: #984638;"></span>
+                <span>+</span>
+            </div>
+            <div class="product-price fa-num">
+                <span class="price-now">@Model.Price <span class="currency">تومان</span></span>
+            </div>
+        </div>
+        <div class="product-card-footer">
+            <div class="d-flex align-items-center justify-content-between border-top mt-2 py-2">
+                <div class="product-actions">
+                    <ul>
+                        <li><a href="/profile/BuyProduct/@Model.ProductId" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="افزودن به سبد خرید" aria-label="افزودن به سبد خرید"><i class="ri-shopping-cart-line"></i></a></li>
+                        <li>
+                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="مشاهده سریع" aria-label="مشاهده سریع" data-remodal-target="quick-view-modal"><i class="ri-search-line"></i></a>
+                        </li>
+                        <li>
+                            <a href="/AddFavoriteProduct/@Model.ProductId" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="افزودن به علاقمندی" aria-label="افزودن به علاقمندی"><i class="ri-heart-3-line"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="product-rating fa-num">
+                    @await Component.InvokeAsync("GetVotes",Model.ProductId)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

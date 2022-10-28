@@ -1,0 +1,62 @@
+﻿@using Application.Interface
+@using Application.StaticTools
+@model Tuple<List<Domain.Models.Product.ProductComment>,Tuple<int ,int>>
+@inject IUserService _UserService
+@{
+    ViewData["Title"] = "ShowComment";
+    Layout = null;
+
+}
+
+
+
+<div style="margin: 20px">
+
+
+    @foreach (var item in Model.Item1.Where(c => c.ParentId == null))
+    {
+        var user = _UserService.GetUserById(item.SenderId);
+        <div class="comments">
+            <!-- start of comment -->
+            <div class="comment">
+                <div class="comment-header">
+                    <span>@item.CreatDate.ToFarsi()</span>
+                    <span>@user.FirstName @user.LastName</span>
+                    <a asp-action="AddComment" asp-route-id="@item.ProductId" asp-route-parentId="@item.Id" class="btn btn-info shiny btn-sm ">پاسخ</a>
+                </div>
+                <div class="comment-body">
+                    <p>
+                        @item.Comment
+                    </p>
+
+                </div>
+
+                @if (Model.Item1.Any(c => c.ParentId == item.Id))
+                {
+                    foreach (var reply in Model.Item1.Where(c => c.ParentId == item.Id))
+                    {
+                        <p></p>
+                        <div style="margin-right: 35px; padding: 10px 30px;" class=" ui-box col-md-4">
+                            <div class="comment-header">
+                                <span>@reply.User.FirstName @reply.User.LastName</span>
+                                <span>@reply.CreatDate.ToFarsi()</span>
+                            </div>
+                            @reply.Comment
+                        </div>
+                    }
+
+
+                }
+                <div class="comment-footer">
+                    <span class="me-2">آیا این دیدگاه برایتان مفید بود؟</span>
+                    <a href="/AddCommentVote/@item.Id?vote=true" class="comment-like"><span>@Model.Item2.Item1</span></a>
+                    <a href="/AddCommentVote/@item.Id?vote=false" class="comment-dislike"><span>@Model.Item2.Item2</span></a>
+                </div>
+            </div>
+            <!-- end of comment -->
+            <!-- end of comment -->
+        </div>
+
+
+    }
+</div>

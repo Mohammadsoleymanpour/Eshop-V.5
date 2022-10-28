@@ -1,0 +1,94 @@
+﻿@using Domain.Models.Role
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Domain.ViewModels.Permission.RoleViewModel
+
+@{
+    var permissions = ViewData["Permission"] as List<Permission>;
+}
+<div class="row">
+    <form method="post" asp-controller="Permission" asp-action="AddRole">
+        <div style="margin-top: 110px" class="col-lg-8 col-sm-6 col-xs-12">
+            <div class="widget">
+                <div class="widget-header bordered-bottom bordered-pink">
+                    <span class="widget-caption">افزودن نقش</span>
+                </div>
+                <div class="widget-body">
+                    <div id="horizontal-form">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" asp-for="Title" placeholder="عنوان" class="form-control">
+                                <div class="horizontal-space"></div>
+                            </div>
+
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-palegreen btn-lg shiny">ثبت</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div style="margin-top: 110px" class="col-lg-4 col-sm-6 col-xs-12">
+            <h5 class="row-title"><i class="typcn typcn-th-menu"></i>لیست دسترسی ها</h5>
+            <div class="form-group">
+                <ul>
+                    @foreach (var item in permissions.Where(c => c.ParentId == null))
+                    {
+
+                        <li>
+                            <div class="checkbox dd-handle">
+                                <label>
+                                    <input type="checkbox" name="selectedPermission" class="inverted" value="@item.Id" >
+                                    <span class="text">@item.Title</span>
+                                </label>
+                            </div>
+                        </li>
+                        if (permissions.Any(c => c.ParentId == item.Id))
+                        {
+                            <ul>
+
+                                @foreach (var result in permissions.Where(c => c.ParentId == item.Id))
+                                {
+                                    <li data-id="3">
+                                        <div class="checkbox dd-handle">
+                                            <label>
+                                                <input type="checkbox" class="inverted" name="selectedPermission" value="@result.Id" >
+                                                <span class="text">@result.Title</span>
+                                            </label>
+                                        </div>
+                                        @if (permissions.Any(c => c.ParentId == result.ParentId))
+                                        {
+                                            <ul>
+                                                @foreach (var result2 in permissions.Where(c => c.ParentId == result.Id))
+                                                {
+
+                                                    <li data-id="6">
+                                                        <div class="checkbox dd-handle">
+                                                            <label>
+                                                                <input type="checkbox" class="inverted" name="selectedPermission" value="@result2.Id" >
+                                                                <span class="text">@result2.Title</span>
+                                                            </label>
+                                                        </div>
+                                                       
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    }
+
+                </ul>
+
+            </div>
+        </div>
+    </form>
+</div>

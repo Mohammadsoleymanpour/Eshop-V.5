@@ -1,0 +1,99 @@
+﻿@using Application.Convertor
+@using Domain.Models.Enums
+@using Eshop.Common
+@model Domain.ViewModels.DynamicLinks.LinksForAdminViewModel
+
+
+<div style="margin-top: 110px" class="col-xs-12 col-md-12">
+    <form id="indexForm">
+        <div class="well with-header  with-footer">
+            <div class="header bg-darkorange">
+                لینک ها
+            </div>
+            <input type="hidden" asp-for="Page" id="page" />
+            <a style="margin-bottom: 20px" class="btn btn-primary shiny " href="/Admin/AddLink"><i class="fa fa-plus"></i> افزودن لینک</a>
+            <table class="table table-hover table-striped table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            عنوان
+                        </th>
+                        <th>
+                            لینک
+                        </th>
+                        <th>
+                            تاریخ انقضا
+                        </th>
+                        <th>
+                            مکان استفاده
+                        </th>
+                        <th>
+                            دستورات
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Entities)
+                    {
+                        <tr>
+                            <td>
+                                @item.Title
+                            </td>
+                            <td>
+                                @item.LinkUrl
+                            </td>
+                            <td>
+                                @item.ExpirationDate.Value.ToShamsi()
+                            </td>
+                            <td>
+                                @switch (item.Position)
+                                {
+                                    case PositionLinks.Footer:
+                                        {
+                                            <p>فوتر</p>
+                                            break;
+                                        }
+                                    case PositionLinks.Header:
+                                        {
+                                            <p>هدر</p>
+                                            break;
+                                        }
+                                }
+                            </td>
+                            <td>
+                                <Authrize permission-id="@Permissions.DeleteLink">
+                                    <a href="/Admin/DeleteLink/@item.Id" class="btn btn-outline-danger btn-danger shiny">
+                                        حذف
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </Authrize>
+                                <Authrize permission-id="@Permissions.AnswerContactUs">
+                                    <a href="/Admin/EditLink/@item.Id" class="btn btn-outline-light btn-light btn-purple   shiny">
+                                        ویرایش
+                                        <i class="btn-label fa fa-warning"></i>
+                                    </a>
+                                </Authrize>
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <partial name="_Paging" model="@Model.GetCurrentPaging()" />
+
+        </div>
+    </form>
+</div>
+
+
+@section Section
+    {
+    <script>
+        function OnClick(pageId) {
+            $("#page").val(pageId)
+            $("#indexForm").submit();
+
+        }
+    </script>
+}

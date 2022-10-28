@@ -1,0 +1,59 @@
+﻿@model Domain.ViewModels.Product_Comment.AnswerCommentViewModel
+@{
+    ViewData["Title"] = "CommentManager";
+}
+
+<div class="row">
+    <form method="post" asp-area="Admin" asp-controller="ProductComment" asp-action="Answer">
+        <input type="hidden" asp-for="CommentId" name="commentIdForDel" />
+        <div class="col-lg-6 col-sm-6 col-xs-12">
+            <div class="widget">
+                <div class="widget-header bordered-top bordered-palegreen">
+                    <span class="widget-caption">مشخصات کامنت</span>
+                </div>
+                <div class="widget-body">
+                    <div class="collapse in">
+                       
+                            <div class="form-group">
+                                <label for="sminput">نام محصول</label>
+                                <input type="text" asp-for="ProductName" class="form-control input-sm" readonly="readonly" id="sminput" placeholder="@Model.ProductName">
+                            </div>
+                            <div class="form-group">
+                                <label for="definpu">فرستنده</label>
+                            <input type="text" asp-for="UserEmail" class="form-control" id="definput" readonly="readonly" placeholder="@Model.UserEmail">
+                            </div>
+                            <div class="form-group">
+                                <label for="lginput">نظر کاربر</label>
+                            <textarea type="text" asp-for="UserComment" class="form-control input-lg" id="lginput" readonly="readonly" placeholder="نظر کاربر">@Model.UserComment</textarea>
+                            </div>
+                            <div class="form-group row">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                                        <textarea asp-for="Answer" id="AnswerComment" cols="10" rows="5"></textarea>
+                                        <span asp-validation-for="Answer"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button  type="submit" class="btn btn-azure shiny">ارسال پاسخ</button>
+                            <a asp-area="Admin" asp-controller="ProductComment" asp-action="DeleteComment" class="btn btn-danger shiny">حذف کامنت</a>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+                                                    
+@*                                                    
+@section section
+{
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+
+        CKEDITOR.replace('AnswerComment', {
+            customConfig: '/js/Config.js'
+        });
+
+    </script>
+}*@

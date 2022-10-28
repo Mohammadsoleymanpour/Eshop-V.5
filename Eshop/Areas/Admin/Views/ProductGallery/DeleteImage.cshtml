@@ -1,0 +1,35 @@
+﻿@model Domain.ViewModels.Product.EditImageGalleryViewModel
+
+<div class="row">
+    <div style="margin-top: 110px;margin-right: 200px" class="col-lg-6 col-sm-6 col-xs-12">
+        <div class="widget radius-bordered">
+            <form method="post" asp-controller="ProductGallery" asp-action="DeleteImage" >
+                <input type="hidden" asp-for="ProductId"/>
+                <input type="hidden" asp-for="imageName"/>
+                <input type="hidden" asp-for="Id"/>
+                <div class="widget-header">
+                    <span class="widget-caption">File Uploads</span>
+                </div>
+                <div class="widget-body">
+
+                    <hr class="wide">
+                    <div class="">
+
+                        <h5>افزودن عکس</h5>
+
+                        <div class="form-group">
+                            <img id="imgProduct" style="max-width: 350px;" class="thumbnail" src="/Images/img/@Model.imageName"/>
+                            <hr class="wide">
+
+
+                        </div>
+
+                        
+
+                        <input type="submit" class="btn btn-success" value="ثبت"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

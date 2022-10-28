@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Domain.Models.Enums
+@model Domain.ViewModels.Ticket.AddTicketFromAdminViewModel
+@{
+    ViewData["Title"] = "AddTicket";
+}
+
+<div style="margin-top: 100px" class="contact container">
+    <div class="row">
+        <form method="post" asp-controller="Ticket" asp-action="AddTicket">
+        <div class="col-lg-8 col-sm-8 col-xs-12">
+            <div class="widget">
+                <div class="widget-header bordered-top bordered-palegreen">
+                    <span class="widget-caption">مشخصات تیکت</span>
+                </div>
+                <div class="widget-body">
+                    <div class="collapse in">
+                            <div class="form-group">
+
+                                <input asp-for="Title" type="text" class="form-control input-xl" id="xsinput" placeholder="تیتر ">
+                            </div>
+                            <div class="form-group">
+                                <select asp-for="Parts" asp-items="Html.GetEnumSelectList(typeof(TicketParts))" class="form-control"></select>
+                            </div>
+                            <div class="form-group">
+                                <select asp-for="Levels" asp-items="Html.GetEnumSelectList(typeof(TicketLevels))" class="form-control"></select>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                      
+                        <div class="form-group">
+                          
+                            <input type="submit" class="form-control btn btn-primary btn-lg" id="xlginput" value="ثبت تیکت" >
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-4 col-xs-12">
+            <div class="widget">
+                <div class="widget-header">
+                    <span class="widget-caption">انتخاب کاربر</span>
+                </div>
+                <div class="widget-body bordered-top bordered-sky">
+                    <div class="collapse in">
+
+                        <div class="form-group">
+                            <span class="input-icon icon-right">
+                                <select asp-for="OwnerId" asp-items="ViewBag.UserList"></select>
+                            </span>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>

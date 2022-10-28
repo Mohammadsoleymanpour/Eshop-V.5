@@ -1,0 +1,74 @@
+﻿
+
+<div class="col-xs-12 col-md-6">
+    <div class="widget">
+        <div class="widget-header">
+            <span class="widget-caption">نمودار فروش هفتگی</span>
+
+            <div class="widget-buttons">
+                <a href="#" data-toggle="collapse">
+                    <i class="fa fa-minus"></i>
+                </a>
+                <a href="#" data-toggle="dispose">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="widget-body">
+
+            <div class="chartcontainer">
+                <canvas id="bar" height="300" width="450" style="width: 450px; height: 300px;"></canvas>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+   
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+@* <script src="/admin/assets/customes/js/saleschartpartial.js"></script>*@
+<script>
+       
+    const labels = [
+        'شنبه',
+        'یکشنبه',
+        'دوشنبه',
+        'سه شنبه',
+        'چهارشنبه',
+        'پنجشنبه',
+        'جمعه',
+    ];
+
+    const chartdata = {
+        labels: labels,
+        datasets:
+        [{
+            label: 'فروش روزانه',
+            backgroundColor: '',
+            borderColor: 'rgb(255, 209, 36)',
+
+            data: [10,20,30,40,50,60,70,85],
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: chartdata,
+        options: {}
+    };
+
+   
+
+</script>
+<script>
+ const bar = new Chart(
+        document.getElementById('bar'),
+        config
+    );
+</script>

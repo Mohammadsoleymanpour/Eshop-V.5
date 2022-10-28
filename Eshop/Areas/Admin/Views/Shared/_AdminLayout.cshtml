@@ -1,0 +1,83 @@
+﻿
+<!DOCTYPE html>
+<!--
+BeyondAdmin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.6
+Version: 1.6.0
+Purchase: https://wrapbootstrap.com/theme/beyondadmin-adminapp-angularjs-mvc-WB06R48S4
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Head -->
+<head>
+
+    <partial name="_meta" />
+    <partial name="_style" />
+    @RenderSection("css",false)
+    <!--Fonts-->
+
+</head>
+<!-- /Head -->
+<!-- Body -->
+<body>
+    <!-- Loading Container -->
+  @*  <div class="loading-container">
+        <div class="loader"></div>
+    </div>*@
+    <!--  /Loading Container -->
+    <!-- Navbar -->
+    <partial name="_sideBar" />
+    <!-- /Navbar -->
+    <!-- Main Container -->
+    <div class="main-container container-fluid">
+        <!-- Page Container -->
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            <partial name="_slide" />
+            <div class="page-content">
+
+
+                <!-- /Page Sidebar -->
+                <!-- Chat Bar -->
+
+                <div b-2nrtd4hb6b="" class="page-breadcrumbs">
+                    <ul b-2nrtd4hb6b="" class="breadcrumb">
+                     
+                        <li b-2nrtd4hb6b="" class="active">@ViewData["Title"]</li>
+                    </ul>
+                </div>
+                       <div b-2nrtd4hb6b="" class="page-header position-relative">
+                    <div b-2nrtd4hb6b="" class="header-title">
+                        <h1 b-2nrtd4hb6b="">
+                            @ViewData["SubTitle"]
+                        </h1>
+                    </div>
+
+         
+                    <!--Header Buttons-->
+                    <div b-2nrtd4hb6b="" class="header-buttons">
+                        <a b-2nrtd4hb6b="" class="sidebar-toggler" href="#" dideo-checked="true">
+                            <i b-2nrtd4hb6b="" class="fa fa-arrows-h"></i>
+                        </a>
+                        <a b-2nrtd4hb6b="" class="refresh" id="refresh-toggler" href="" dideo-checked="true">
+                            <i b-2nrtd4hb6b="" class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a b-2nrtd4hb6b="" class="fullscreen" id="fullscreen-toggler" href="#" dideo-checked="true">
+                            <i b-2nrtd4hb6b="" class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <!-- /Page Container -->
+    <!-- Main Container -->
+    <!--Basic Scripts-->
+  
+    <partial name="_LayoutJs" />
+    @RenderSection("Section",false)
+</body>
+<!--  /Body -->
+</html>

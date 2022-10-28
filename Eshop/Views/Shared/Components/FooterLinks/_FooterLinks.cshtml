@@ -1,0 +1,9 @@
+﻿@using Domain.ViewModels.DynamicLinks
+@model LinksForSiteViewModel
+@if (Model != null)
+{
+    foreach (var link in Model.Links)
+    {
+        <li><a href="@link.LinkUrl">@link.Title</a></li>
+    }
+}

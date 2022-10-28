@@ -1,0 +1,120 @@
+﻿@using Domain.Models.Enums
+@model Domain.ViewModels.ContactUs.AnswerContactUsViewModel
+@{
+    ViewData["Title"] = "AnswerContactUs";
+}
+
+
+<div style="margin-top: 100px" class="container">
+    <form method="post" asp-controller="ContactUs" asp-action="AnswerContactUs">
+        <input type="hidden" asp-for="Id"  />
+
+
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget flat radius-bordered">
+                    <div class="widget-header bg-warning">
+                </div>
+                    <div class="widget-body">
+                        <div id="registration-form">
+
+                            <div class="form-title">
+                                مشخصات
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <span class="input-icon icon-right">
+                                        <input type="text" class="form-control" id="emailInput" readonly="readonly" asp-for="Email" placeholder="Email Address">
+                                        <i class="fa fa-envelope-o circular"></i>
+                                    </span>
+                                </div>
+                        </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <span class="input-icon icon-right">
+                                        <input type="text" class="form-control" readonly="readonly" asp-for="PhoneNumber" placeholder="Mobile">
+                                        <i class="glyphicon glyphicon-phone"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-title">
+                                اطلاعات پیام
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <span class="input-icon icon-right">
+                                        <input type="text" readonly="readonly" asp-for="FullName" class="form-control" placeholder="نام">
+                                        <i class="fa fa-user"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group row">
+                                    <span class="glyphicon glyphicon-pencil icon-right">
+                                        <input type="text" readonly="readonly" asp-for="Subject" class="form-control" placeholder="نام خانوادگی">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <span class="input-icon icon-right">
+                                        <input type="text" readonly="readonly" asp-for="PhoneNumber" class="form-control" placeholder="شماره موبایل">
+                                        <i class="glyphicon glyphicon-phone"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <span class="input-icon icon-right">
+                                        <input type="text" readonly="readonly" asp-for="Body" class="form-control " style="border-radius: 5px" placeholder="تاریخ تولد">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <span class="input-icon icon-right">
+                                        <textarea type="text"   asp-for="AnswerBody" class="form-control " style="border-radius: 5px" placeholder="نوشتن پاسخx`"></textarea>
+                                        <i class="fa fa-file-text"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <span asp-validation-all=""></span>
+                                <button type="submit" class="btn btn-warning btn-group-lg btn-lg">ثبت و ارسال ایمیل</button>
+                                </>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+    </form>
+</div>
+
+@section Section
+        {
+        <script src="//code.jquery.com/jquery.min.js"></script>
+
+        <script src="/js/kamadatepicker.js"></script>
+        <script src="/js/kamadatepicker.holidays.js"></script>
+        <script src="/js/kamadatepicker.min.js"></script>
+
+    @*  <script src="/js/webpack.config.js"></script>*@
+
+
+        <script>
+
+            kamaDatepicker('test-date-id', { buttonsColor: "red", forceFarsiDigits: true });
+        </script>
+
+
+}
+
+    
+    
+    
+

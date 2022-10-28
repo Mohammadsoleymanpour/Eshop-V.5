@@ -1,0 +1,69 @@
+﻿@using Application.StaticTools
+
+
+<div class="col-xl-3 col-lg-4 col-md-5 mb-md-0 mb-4">
+    <div class="ui-sticky ui-sticky-top">
+        <div class="profile-user-info py-3 ui-box bg-white">
+            <div class="profile-detail">
+                <div class="d-flex align-items-center">
+                    <div class="profile-avatar me-3">
+                        <img src="./site/theme-assets/images/avatar/default.png" alt="avatar">
+                    </div>
+                    <div class="profile-info">
+                        <a href="#" class="text-decoration-none text-dark fw-bold mb-2">
+                            @User.Identity.Name.SetUnReadableEmail()
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <ul class="nav nav-items-with-icon flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Profile" asp-controller="Ticket" asp-action="GetAllTickets">
+                        <i class="nav-link-icon ri-file-list-3-line"></i>
+                        لیست تیکت ها
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Profile/FavoriteProduct">
+                        <i class="nav-link-icon ri-heart-3-line"></i> لیست
+                        کالاهای مورد علاقه
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Profile/Comment">
+                        <i class="nav-link-icon ri-chat-1-line"></i>
+                        نظرات
+                    </a>
+                </li>
+              
+                <li class="nav-item">
+                    <a class="nav-link" href="Profile/Discounts">
+                        <i class="nav-link-icon ri-gift-line"></i>
+                        کد های تخفیف
+                    </a>
+                </li>
+              
+                <li class="nav-item">
+                    <a class="nav-link" href="/Profile/LastLogins">
+                        <i class="nav-link-icon ri-time-line"></i> بازدید
+                        های
+                        اخیر
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Profile/UserDetail">
+                        <i class="nav-link-icon ri-user-line"></i> اطلاعات
+                        حساب
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Logout">
+                        <i class="nav-link-icon ri-logout-box-r-line"></i>
+                        خروج
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
