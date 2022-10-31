@@ -26,7 +26,7 @@ namespace Eshop.Areas.Profile.Controllers
         }
         [Route("Orders/{id}")]
         [HttpPost]
-        public  IActionResult Index(Order model,int price)
+        public IActionResult Index(Order model,int price)
         {
         
             var payment = new ZarinpalSandbox.Payment(price);

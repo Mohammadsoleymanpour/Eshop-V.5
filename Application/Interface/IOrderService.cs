@@ -24,7 +24,7 @@ namespace Application.Interface
         Task<int> GetTotalPrice(int orderId);
         Task<Order> GetOrderByUserId(int userId);
         Task<int> AddOrderFromUser(int userId, int productId, int? productPriceId);
-
+        Task<List<Order>> GetUserLastOrders(int userId, int count);
         Task<List<OrderDetail>> GetListOrderDetailsByOrderId(int orderId);
         Task<int> AddOrderDetailProductFeature(OrderDetailProductFeature model);
 

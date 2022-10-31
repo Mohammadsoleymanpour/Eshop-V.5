@@ -95,6 +95,16 @@ namespace DataLayer.Repositories
             return res;
         }
 
+        public async Task<List<Order>> GetUserLastOrders(int userId, int count)
+        {
+            var  res =await _context.Orders
+                .Include(o=>o.OrderDetails)
+                .ThenInclude(od=>od.Product)
+                .OrderByDescending(o => o.CreatDate)
+                .Where(o => o.UserId == userId).Take(5).ToListAsync();
+            return res;
+        }
+
         public async Task<int> GetTotalPrice(int orderId)
         {
             var order = await GetOrderById(orderId);

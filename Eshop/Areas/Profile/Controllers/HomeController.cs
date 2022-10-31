@@ -15,19 +15,22 @@ namespace Eshop.Areas.Profile.Controllers
     {
         #region Injections
 
-        private IUserService _userService;
-        IProductService _productService;
+        private readonly IUserService _userService;
+       private readonly IProductService _productService;
+       private readonly IOrderService _orderService;
 
-        public HomeController(IUserService userService, IProductService productService)
+        public HomeController(IUserService userService, IProductService productService, IOrderService orderService)
         {
             _userService = userService;
             _productService = productService;
+            _orderService = orderService;
         }
 
         #endregion
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewData["LastOrders"] = await _orderService.GetUserLastOrders(User.GetUserId(), 5);
             return View();
         }
 

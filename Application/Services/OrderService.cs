@@ -227,6 +227,11 @@ namespace Application.Services
 
         }
 
+        public async Task<List<Order>> GetUserLastOrders(int userId, int count)
+        {
+            return await _repository.GetUserLastOrders(userId, count);
+        }
+
         public async Task<List<OrderDetail>> GetListOrderDetailsByOrderId(int orderId)
         {
             return await _repository.GetListOrderDetailsByOrderId(orderId);
