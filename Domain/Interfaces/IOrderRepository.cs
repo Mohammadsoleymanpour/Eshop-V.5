@@ -25,6 +25,7 @@ namespace Domain.Interfaces
         Task<int> AddOrderFromUser(Order order);
 
         Task<Order> GetOrderByUserId(int userId);
+        Task<List<Order>> GetUserLastOrders(int userId, int count);
 
         Task<int> GetTotalPrice(int orderId);
 
