@@ -39,17 +39,15 @@
                             <div class="d-flex align-items-center justify-content-between border-top mt-2 py-2">
                                 <div class="product-actions">
                                     <ul>
-                                        <li><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="افزودن به سبد خرید" aria-label="افزودن به سبد خرید"><i class="ri-shopping-cart-line"></i></a></li>
-                                        <li>
+                                        <li><a href="/profile/BuyProduct/@Model.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="افزودن به سبد خرید" aria-label="افزودن به سبد خرید"><i class="ri-shopping-cart-line"></i></a></li>
+                                        @*<li>
                                             <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="مشاهده سریع" aria-label="مشاهده سریع" data-remodal-target="quick-view-modal"><i class="ri-search-line"></i></a>
-                                        </li>
+                                        </li>*@
 
                                     </ul>
                                 </div>
                                 <div class="product-rating fa-num">
-                                    <i class="ri-star-fill star"></i>
-                                    <strong>۴.۴</strong>
-                                    <span>(۴۳۶)</span>
+                                    @await Component.InvokeAsync("GetVotes",Model.Id)
                                 </div>
                             </div>
                         </div>
