@@ -1,10 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Application.Security
+<!DOCTYPE html>
 <html lang="fa">
 
 <head>
     <partial name="_Style" />
     @RenderSection("css",false)
-    
+
 </head>
 
 <body>
@@ -27,20 +28,10 @@
         <header class="page-header-responsive d-md-none">
             <div class="page-header-responsive-row mb-3">
                 <div class="d-flex align-items-center">
-                    <div class="navigation-container">
+                    <div class="navigation-main">
                         <button class="toggle-navigation"></button>
-                        <div class="navigation">
-                            <div class="navigation-header">
-                                <div class="logo-container logo-box">
-                                    <a href="#" class="logo">
-                                        <img src="/site/theme-assets/images/logo.svg" width="120" alt="">
-                                        <span class="logo-text">بررسی،انتخاب و خرید آنلاین</span>
-                                    </a>
-                                </div>
-                            </div>
-                  
-                        </div>
-                        <div class="navigation-overlay"></div>
+                        @await Component.InvokeAsync("GroupViewResponsiveComponent")
+                        <div class="navigation-overlay" style="display: block;"></div>
                     </div>
                     <div class="logo">
                         <a href="#">
@@ -48,47 +39,54 @@
                         </a>
                     </div>
                 </div>
-               @* <div class="user-options">
-                    <div class="user-option">
-                        <a href="#" class="user-option-btn user-option-btn--account">
-                            <i class="ri-user-fill icon"></i>
-                        </a>
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                    <div class="user-options">
+                        <div class="user-option">
+                            <a href="/profile" class="user-option-btn user-option-btn--account">
+                                <i class="ri-user-fill icon"></i>
+                            </a>
+
+                        </div>
+                        <div class="user-option">
+                            <a href="/Profile/FavoriteProduct" class="user-option-btn user-option-btn--account">
+                                <i class="ri-heart-3-fill icon"></i>
+
+                            </a>
+                        </div>
+                        @await Component.InvokeAsync("Order",User.GetUserId())
                     </div>
-                    <div class="user-option">
-                        <a href="#" class="user-option-btn user-option-btn--account">
-                            <i class="ri-heart-3-fill icon"></i>
-                            <span class="counter">۲</span>
-                        </a>
-                    </div>
-                    <div class="user-option user-option--cart">
-                        <a href="#" class="user-option-btn user-option-btn--cart">
-                            <i class="ri-shopping-bag-2-fill icon"></i>
-                            <span class="counter">۴</span>
-                        </a>
-                    </div>
-                </div>*@
+                }
+                else
+                {
+                    <ul class="nav nav-pills nav-tabs align-items-center mb-4 " id="sort-tab" role="tablist">
+
+                        <li class="nav-item" role="presentation">
+                            <a href="/Register" class="nav-link " id="most-visited-tab" aria-controls="most-visited" aria-selected="true">ثبت نام</a>
+                        </li>
+                        /
+                        <li class="nav-item" role="presentation">
+                            <a href="/Login" class="nav-link" id="best-selling-tab" aria-controls="best-selling" aria-selected="false">
+                                ورود
+                            </a>
+                        </li>
+
+                    </ul>
+                }
             </div>
             <div class="page-header-responsive-row">
                 <div class="search-container">
-                    <form action="#" class="search-form">
-                        <input type="text" class="form-control search-field" placeholder="جستجو کنید..">
+                    <form asp-controller="Product" asp-action="ProductFilter" method="get" class="search-form">
+                        <input type="text" name="name" id="searche" class="form-control search-field" placeholder="جستجو کنید..">
                         <button class="btn btn-primary btn-search btn-action">
                             <i class="ri-search-2-line"></i>
                         </button>
-                        <button class="btn btn-primary btn-close-search-result btn-action d-none">
-                            <i class="ri-close-line"></i>
+                        <button class="btn btn-primary  btn-action d-none">
+                            <i class="ri-search-2-line"></i>
                         </button>
                     </form>
-                    <div class="search-result-container">
-                        <div class="search-result-tags-container">
-                            <div class="search-result-tags-label">
-                                <i class="ri-fire-line"></i> بیشترین جستجوهای اخیر
-                            </div>
-                           
-                        </div>
-                        <div class="border-bottom my-3"></div>
-                        
-                    </div>
+
                 </div>
             </div>
         </header>
@@ -108,10 +106,10 @@
 
 
     <partial name="_layoutJs" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     @RenderSection("Section",false)
-   
-<script>
+
+    <script>
         $(document).ready(function () {
             $("#searche").autocomplete({
                 source: 'api/ProductApi/Search'

@@ -1,0 +1,41 @@
+﻿@using Application.Interface
+@inject IProductService _ProductService
+
+<div class="navigation ">
+    <div class="navigation-header">
+        <div class="logo-container logo-box">
+            <a href="#" class="logo">
+                <img src="/site/theme-assets/images/logo.svg" width="120" alt="">
+                <span class="logo-text">بررسی،انتخاب و خرید آنلاین</span>
+            </a>
+        </div>
+    </div>
+    <div class="navigation-body">
+        <ul class="menu">
+            @foreach (var item in await _ProductService.GetAllProductsCategoryAsync())
+            {
+                <li>
+                    <a href="#" class="toggle-submenu">
+                        <span>@item.Title</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="close-submenu">
+                            <i class="ri-arrow-right-s-line"></i>
+                            @item.Title
+                        </li>
+                        @foreach (var subItem in await _ProductService.GetAllSubProductCategoryAsync(item.Id))
+                        {
+                            <li>
+                                <a href="/FilterProduct/@subItem.Id" class="toggle-submenu">
+                                    @subItem.Title
+                                </a>
+                        
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }  
+        </ul>
+    </div>
+   
+</div>
