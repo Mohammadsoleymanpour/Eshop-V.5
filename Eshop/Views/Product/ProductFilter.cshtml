@@ -14,23 +14,23 @@
 
                 <div class="row">
                     <div class="col-xl-3 col-lg-4 col-md-5 responsive-sidebar">
-                        <div class="ui-sticky ui-sticky-top">
-                            <div class="ui-box sidebar-widgets">
-                                <!-- start of widget -->
-                                <div class="widget p-0 mb-3">
-                                    <div class="widget-content widget--free-shipping">
-                                        <div class="free-shipping--detail">
-                                            <div class="title">ارسال رایگان سفارش</div>
-                                            <div class="subtitle">سفارش‌های بالای ۳۰۰ هزار تومان</div>
-                                        </div>
-                                        <div class="free-shipping--banner">
-                                            <img src="/site/theme-assets/images/theme/free-shipping--banner.png" alt="ارسال رایگان سفارش">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end of widget -->
-                                <!-- start of widget -->
-                                @*  <div class="widget mb-3">
+                    <div class="ui-sticky ui-sticky-top">
+                    <div class="ui-box sidebar-widgets">
+                    <!-- start of widget -->
+                    <div class="widget p-0 mb-3">
+                        <div class="widget-content widget--free-shipping">
+                            <div class="free-shipping--detail">
+                                <div class="title">ارسال رایگان سفارش</div>
+                                <div class="subtitle">سفارش‌های بالای ۳۰۰ هزار تومان</div>
+                            </div>
+                            <div class="free-shipping--banner">
+                                <img src="/site/theme-assets/images/theme/free-shipping--banner.png" alt="ارسال رایگان سفارش">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end of widget -->
+                    <!-- start of widget -->
+                    @*  <div class="widget mb-3">
                             <div class="widget-title">دسته‌بندی نتایج</div>
                             <div class="widget-content widget--category-results">
                             <ul>
@@ -41,24 +41,24 @@
                             </ul>
                             </div>
                             </div>*@
-                                <!-- end of widget -->
-                                <!-- start of widget -->
-                                <div class="widget mb-3">
-                                    <div class="widget-title">جستجو در نتایج:</div>
-                                    <div class="widget-content widget--search">
-                                        <form method="get" asp-controller="Product" asp-action="ProductFilter">
-                                            <div class="form-element-row">
-                                                <input type="text" asp-for="Title" class="form-control" placeholder="نام محصول یا…">
-                                                <i class="ri-search-line icon"></i>
+                    <!-- end of widget -->
+                    <!-- start of widget -->
+                    <div class="widget mb-3">
+                        <div class="widget-title">جستجو در نتایج:</div>
+                        <div class="widget-content widget--search">
+                            <form method="get" asp-controller="Product" asp-action="ProductFilter">
+                                <div class="form-element-row">
+                                    <input type="text" asp-for="Title" class="form-control" placeholder="نام محصول یا…">
+                                    <i class="ri-search-line icon"></i>
 
-                                            </div>
-                                            <button type="submit" class="btn btn-primary btn-lg shiny">اعمال</button>
-                                        </form>
-                                    </div>
                                 </div>
-                                <!-- end of widget -->
-                                <!-- start of widget -->
-                              @*  <div class="widget widget-collapse mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg shiny">اعمال</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- end of widget -->
+                    <!-- start of widget -->
+                    @*  <div class="widget widget-collapse mb-3">
                                     <div class="widget-title widget-title--collapse-btn" data-bs-toggle="collapse" data-bs-target="#collapseBrandFilter" aria-expanded="false" aria-controls="collapseBrandFilter" role="button">برند</div>
                                     <div class="widget-content widget--search collapse" id="collapseBrandFilter">
                                         <form action="#" class="pt-2">
@@ -190,9 +190,9 @@
                                         </form>
                                     </div>
                                 </div>*@
-                                <!-- end of widget -->
-                                <!-- start of widget -->
-                              @*  <div class="widget py-1 mb-3">
+                    <!-- end of widget -->
+                    <!-- start of widget -->
+                    @*  <div class="widget py-1 mb-3">
                                     <div class="widget-content widget--filter-switcher">
                                         <div class="d-flex border-bottom pb-1 mb-2">
                                             <i class="ri-user-2-fill text-primary me-2"></i>
@@ -237,9 +237,9 @@
                                         </div>
                                     </div>
                                 </div>*@
-                                <!-- end of widget -->
-                                <!-- start of widget -->
-                               @* <div class="widget widget-collapse mb-3">
+                    <!-- end of widget -->
+                    <!-- start of widget -->
+                    @* <div class="widget widget-collapse mb-3">
                                     <div class="widget-title widget-title--collapse-btn" data-bs-toggle="collapse" data-bs-target="#collapseColorFilter" aria-expanded="false" aria-controls="collapseColorFilter" role="button">رنگ ها</div>
                                     <div class="widget-content widget--search collapse" id="collapseColorFilter">
                                         <form action="#" class="pt-2">
@@ -371,36 +371,37 @@
                                         </form>
                                     </div>
                                 </div>*@
-                                <!-- end of widget -->
-                                <form id="" method="get" asp-controller="Product" asp-action="ProductFilter">
-                                    <!-- start of widget -->
-                                    <div class="widget widget-collapse">
-                                        <div class="widget-title widget-title--collapse-btn" data-bs-toggle="collapse" data-bs-target="#collapsePriceFilter" aria-expanded="false" aria-controls="collapsePriceFilter" role="button">محدوده قیمت</div>
-                                        <div class="widget-content widget--search fa-num collapse" id="collapsePriceFilter">
+                    <!-- end of widget -->
+                    <form id="" method="get" asp-controller="Product" asp-action="ProductFilter">
+                        <!-- start of widget -->
+                        <div class="widget widget-collapse">
+                            <div class="widget-title widget-title--collapse-btn" data-bs-toggle="collapse" data-bs-target="#collapsePriceFilter" aria-expanded="false" aria-controls="collapsePriceFilter" role="button">محدوده قیمت</div>
+                            <div class="widget-content widget--search fa-num collapse" id="collapsePriceFilter">
 
-                                            <div id="searchable_filter" class="dataTables_filter small">
-                                                <div style="margin-bottom: 10px" class="range-slider ">
+                                <div id="searchable_filter" class="dataTables_filter small">
+                                    <div style="margin-bottom: 10px" class="range-slider ">
 
-                                                    <input asp-for="StartPrice" value="" class="rangepriccce" min="0" max="10000000" step="500" type="range" />
-                                                    <input asp-for="EndPrice" value="" class="rangepriccce" min="0" max="10000000" step="500" type="range" />
+                                        <input asp-for="StartPrice" value="" class="rangepriccce" min="0" max="10000000" step="500" type="range" />
+                                        <input asp-for="EndPrice" value="" class="rangepriccce" min="0" max="10000000" step="500" type="range" />
 
-                                                    <svg width="100%" height="24">
-                                                        <line x1="4" y1="0" x2="300" y2="0" stroke="#444" stroke-width="12" stroke-dasharray="1 28"></line>
-                                                    </svg>
-                                                    <span>
-                                                        از
-                                                        <input type="number" value="" min="0" max="10000000" />تا
-                                                        <input type="number" value="" min="0" max="10000000" />
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary btn-lg shiny">اعمال</button>
-                                        </div>
+                                        <svg width="100%" height="24">
+                                            <line x1="4" y1="0" x2="300" y2="0" stroke="#444" stroke-width="12" stroke-dasharray="1 28"></line>
+                                        </svg>
+                                        <span>
+                                            از
+                                            <input type="number" value="" min="0" max="10000000" />تا
+                                            <input type="number" value="" min="0" max="10000000" />
+                                        </span>
                                     </div>
-                                    <!-- end of widget -->
-                                </form>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg shiny">اعمال</button>
                             </div>
                         </div>
+                        <!-- end of widget -->
+                    </form>
+                    </div>
+                    </div>
+                    <button style="margin: 10px" type="button" class="btn btn-danger btn-lg shiny toggle-close">بستن</button>
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-7">
                         <!-- start of breadcrumb -->
@@ -724,5 +725,20 @@
             });
 
         })();
+        
+         $(".toggle-responsive-sidebar").on("click", function (e) {
+      e.preventDefault();
+      $(".responsive-sidebar").addClass("show");
+      $("header").hide();
+      $(".responsive-sidebar-overlay").addClass("show");
+    });
+    
+    
+     $(".toggle-close").on("click", function (e) {
+      e.preventDefault();
+      $(".responsive-sidebar").removeClass("show");
+      $("header").show();
+      $(".responsive-sidebar-overlay").removeClass("show");
+    });
     </script>
 }

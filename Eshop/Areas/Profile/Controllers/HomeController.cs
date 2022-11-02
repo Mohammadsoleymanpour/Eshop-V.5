@@ -28,6 +28,7 @@ namespace Eshop.Areas.Profile.Controllers
 
         #endregion
 
+        
         public async Task<IActionResult> Index()
         {
             ViewData["LastOrders"] = await _orderService.GetUserLastOrders(User.GetUserId(), 5);
